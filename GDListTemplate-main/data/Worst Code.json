@@ -1,0 +1,25 @@
+{
+    "id": 57436521,
+    "name": "Worst Code",
+    "author": "Santiquemero",
+    "creators": [],
+    "verifier": "Cementerio",
+    "verification": "",
+    "percentToQualify": "0",
+    "password": "Free To Copy",
+    "records": [
+         {
+            "user": "Santiquemero",
+            "link": "",
+            "percent": 100,
+            "hz": 60
+        },
+         {
+            "user": "Bautx",
+            "link": "",
+            "percent": 100,
+            "hz": 60
+        }
+       
+    ]
+}

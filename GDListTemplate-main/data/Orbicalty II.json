@@ -1,0 +1,31 @@
+{
+    "id": 57436521,
+    "name": "Orbicalty II",
+    "author": "Santiquemero",
+    "creators": [],
+    "verifier": "Bautx",
+    "verification": "",
+    "percentToQualify": "0",
+    "password": "Free To Copy",
+    "records": [
+         {
+            "user": "Santiquemero",
+            "link": "",
+            "percent": 100,
+            "hz": 60
+        },
+         {
+            "user": "Cementerio",
+            "link": "",
+            "percent": 100,
+            "hz": 60
+        },
+         {
+            "user": "MateioPepeio",
+            "link": "",
+            "percent": 72,
+            "hz": 60
+        }
+       
+    ]
+}

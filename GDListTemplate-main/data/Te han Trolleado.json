@@ -1,0 +1,38 @@
+{
+    "id": 57436521,
+    "name": "Te han Trolleado",
+    "author": "MateioPepeio",
+    "creators": [],
+    "verifier": "MateioPepeio",
+    "verification": "",
+    "percentToQualify": "0",
+    "password": "Free To Copy",
+    "records": [
+ {
+            "user": "Santiquemero",
+            "link": "",
+            "percent": 100,
+            "hz": 60
+        },
+         {
+            "user": "Cementerio",
+            "link": "",
+            "percent": 100,
+            "hz": 60
+        },
+         {
+            "user": "Entity32",
+            "link": "",
+            "percent": 100,
+            "hz": 60
+        },
+         {
+            "user": "Taiopro",
+            "link": "",
+            "percent": 100,
+            "hz": 60
+        }
+      
+        
+    ]
+}

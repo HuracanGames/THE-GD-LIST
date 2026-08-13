@@ -1,0 +1,36 @@
+{
+    "id": 57436521,
+    "name": "Super Sonic X",
+    "author": "Santiquemero",
+    "creators": [],
+    "verifier": "Santiquemero",
+    "verification": "https://www.youtube.com/watch?v=JJRgmYsB3b0&t=2s",
+    "percentToQualify": "0",
+    "password": "Free To Copy",
+    "records": [
+         {
+            "user": "Cementerio",
+            "link": "",
+            "percent": 100,
+            "hz": 60
+        },
+       {
+            "user": "Bautx",
+            "link": "",
+            "percent": 100,
+            "hz": 60
+        },
+         {
+            "user": "Entity32",
+            "link": "",
+            "percent": 100,
+            "hz": 60
+        },
+         {
+            "user": "MateioPepeio",
+            "link": "",
+            "percent": 67,
+            "hz": 60
+        }
+    ]
+}

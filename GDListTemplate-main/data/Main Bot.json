@@ -1,0 +1,25 @@
+{
+    "id": 57436521,
+    "name": "Main Bot",
+    "author": "MateioPepeio",
+    "creators": [],
+    "verifier": "Cementerio",
+    "verification": "",
+    "percentToQualify": "0",
+    "password": "Free To Copy",
+    "records": [
+         {
+            "user": "Santiquemero",
+            "link": "",
+            "percent": 100,
+            "hz": 60
+        },
+         {
+            "user": "MateioPepeio",
+            "link": "",
+            "percent": 100,
+            "hz": 60
+        }
+    ]
+
+}
