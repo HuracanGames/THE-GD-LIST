@@ -1,0 +1,20 @@
+{
+    "id": 44,
+    "name": "Super Blaster v2 (Nerfed)",
+    "author": "Santiquemero",
+    "creators": [],
+    "verifier": "Santiquemero",
+    "verification": "https://www.youtube.com/watch?v=xxaO6HTwleg",
+    "percentToQualify": "60",
+    "password": "Free To Copy",
+    "records": [ 
+         {
+            "user": "Bautx",
+            "link": "",
+            "percent": 100,
+            "hz": 60
+        }
+    ]
+    
+
+}

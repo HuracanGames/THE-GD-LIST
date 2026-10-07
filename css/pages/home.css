@@ -1,0 +1,96 @@
+.home-page {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 3rem 2rem 6rem;
+}
+
+.home-section {
+    margin-bottom: 5rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.2);
+}
+
+.home-section:last-of-type {
+    border-bottom: none;
+}
+
+.home-section h2 {
+    margin-bottom: 1.5rem;
+}
+
+.home-section h3 {
+    margin-bottom: 0.8rem;
+}
+
+.home-section p {
+    line-height: 1.7;
+    margin-bottom: 1.2rem;
+}
+
+.home-section ul {
+    padding-left: 1.5rem;
+    margin-top: 1rem;
+}
+
+.home-section li {
+    line-height: 1.8;
+}
+
+.home-info-box {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    border-radius: 14px;
+    background: rgba(128, 128, 128, 0.10);
+    border: 1px solid rgba(128, 128, 128, 0.15);
+}
+
+.home-info-box h3 {
+    margin-bottom: 1rem;
+}
+
+.home-info-box p:last-child {
+    margin-bottom: 0;
+}
+
+.home-big-number {
+    font-size: 2rem !important;
+    font-weight: 700;
+}
+
+.home-navigation {
+    margin-top: 4rem;
+    padding-top: 3rem;
+    text-align: center;
+}
+
+.home-navigation h2 {
+    margin-bottom: 1rem;
+}
+
+.home-navigation p {
+    margin-bottom: 1.5rem;
+}
+
+.home-buttons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.home-button {
+    display: inline-block;
+    padding: 0.9rem 1.5rem;
+    border-radius: 10px;
+    background: rgba(128, 128, 128, 0.12);
+    text-decoration: none;
+    font-weight: 700;
+    transition:
+        transform 0.15s ease,
+        background 0.15s ease;
+}
+
+.home-button:hover {
+    transform: translateY(-2px);
+    background: rgba(128, 128, 128, 0.2);
+}

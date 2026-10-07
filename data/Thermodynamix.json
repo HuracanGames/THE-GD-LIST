@@ -1,0 +1,24 @@
+{
+    "id": 52,
+    "name": "Thermodynamix",
+    "author": "Santiquemero",
+    "creators": [],
+    "verifier": "Bautx",
+    "verification": "",
+    "percentToQualify": "89",
+    "password": "Free To Copy",
+    "records": [
+         {
+            "user": "Cementerio",
+            "link": "",
+            "percent": 100,
+            "hz": 120
+        },
+        {
+            "user": "Santiquemero",
+            "link": "",
+            "percent": 100,
+            "hz": 120
+        }
+    ]
+}

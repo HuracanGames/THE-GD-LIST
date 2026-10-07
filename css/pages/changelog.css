@@ -1,0 +1,47 @@
+.changelog {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 5rem 2rem 6rem;
+}
+
+.changelog__header {
+    text-align: center;
+    padding-bottom: 4rem;
+}
+
+.changelog__header h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.changelog__header p {
+    line-height: 1.7;
+    opacity: 0.8;
+}
+
+.changelog__entry {
+    padding: 2rem;
+    margin-bottom: 2rem;
+    border-radius: 0.75rem;
+    background-color: rgba(128, 128, 128, 0.12);
+}
+
+.changelog__date {
+    font-size: 0.9rem;
+    opacity: 0.7;
+    margin-bottom: 0.75rem;
+}
+
+.changelog__entry h2 {
+    margin-bottom: 1rem;
+}
+
+.changelog__entry ul {
+    margin: 0;
+    padding-left: 1.5rem;
+}
+
+.changelog__entry li {
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+}
