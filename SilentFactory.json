@@ -1,0 +1,33 @@
+{
+    "id": 24,
+    "name": "Silent Factory I",
+    "author": "Santiquemero",
+    "creators": [],
+    "verifier": "Bautx",
+    "verification": "",
+    "percentToQualify": "60",
+    "password": "Free To Copy",
+    "records": [
+        {
+        "user": "Entity32",
+        "link": "",
+        "percent": 100,
+        "hz": 60
+    },
+    {
+        "user": "Santiquemero",
+        "link": "",
+        "percent": 100,
+        "hz": 60
+    }
+    
+
+    ],
+    "positionhistory":
+    [
+    { "date": "Agregado a la lista / ???", "position": 1 },
+  { "date": "???", "position": 2 },
+  { "date": "???", "position": 1 },
+  { "date": "???", "position": 2 }
+  ]
+}

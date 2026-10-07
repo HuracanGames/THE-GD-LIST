@@ -1,0 +1,30 @@
+{
+    "id": 21,
+    "name": "Polis",
+    "author": "Santiquemero",
+    "creators": [],
+    "verifier": "Santiquemero",
+    "verification": "",
+    "percentToQualify": "0",
+    "password": "Free To Copy",
+    "records": [
+         {
+        "user": "Bautx",
+        "link": "",
+        "percent": 100,
+        "hz": 60
+    },
+     {
+        "user": "Cementerio",
+        "link": "",
+        "percent": 100,
+        "hz": 60
+    },
+     {
+        "user": "Lichagrana",
+        "link": "",
+        "percent": 100,
+        "hz": 60
+    }
+    ]
+}
