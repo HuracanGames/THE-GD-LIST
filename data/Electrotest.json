@@ -1,0 +1,19 @@
+{
+    "id": 4,
+    "name": "ElectroTest",
+    "author": "MateioPepeio",
+    "creators": ["MateioPepeio"],
+    "verifier": "MateioPepeio",
+    "verification": "",
+    "percentToQualify": "50",
+    "password": "Free to Copy",
+    "records": [
+        {
+            "user": "Santiquemero",
+            "link": "",
+            "percent": 100,
+            "hz": 60
+        }
+        
+    ]
+}

@@ -1,0 +1,106 @@
+.page-packs {
+    padding: 4rem 2rem;
+}
+
+.packs-container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.packs-header {
+    margin-bottom: 3rem;
+}
+
+.packs-header h1 {
+    margin-bottom: 0.5rem;
+}
+
+.packs-header p {
+    opacity: 0.7;
+}
+
+/* PACK */
+
+.pack {
+    margin-bottom: 2rem;
+    padding: 1.75rem;
+    border-radius: 16px;
+    background: rgba(128, 128, 128, 0.10);
+    border: 1px solid rgba(128, 128, 128, 0.15);
+}
+
+/* HEADER DEL PACK */
+
+.pack-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.pack-header h2 {
+    margin-bottom: 0.4rem;
+}
+
+.pack-description {
+    margin: 0;
+    opacity: 0.7;
+}
+
+/* CANTIDAD DE NIVELES */
+
+.pack-count {
+    min-width: 80px;
+    text-align: center;
+    padding: 0.75rem 1rem;
+    border-radius: 12px;
+    background: rgba(128, 128, 128, 0.12);
+}
+
+.pack-count strong {
+    display: block;
+    font-size: 1.5rem;
+}
+
+.pack-count span {
+    font-size: 0.8rem;
+    opacity: 0.7;
+}
+
+/* NIVELES */
+
+.pack-levels {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.pack-level {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.9rem 1rem;
+    border-radius: 10px;
+    background: rgba(128, 128, 128, 0.08);
+}
+
+/* NÚMERO DENTRO DEL PACK */
+
+.pack-level-number {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    background: rgba(128, 128, 128, 0.15);
+    font-weight: 700;
+}
+
+/* POSICIÓN EN THE GD LIST */
+
+.pack-level-position {
+    font-weight: 700;
+    font-size: 1rem;
+}

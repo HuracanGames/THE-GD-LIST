@@ -1,0 +1,44 @@
+
+{
+    "Santiquemero": {
+        "country": "AR",
+        "hardest": "Heliopolis VF",
+        "hardestPosition": 1
+    },
+
+    "Bautx": {
+        "country": "AR",
+        "hardest": "Thermodynamix",
+        "hardestPosition": 2
+    },
+
+    "MateioPepeio": {
+        "country": "AR",
+        "hardest": "Super Blaster",
+        "hardestPosition": 4
+    },
+
+    "Cementerio": {
+        "country": "AR",
+        "hardest": "The Road to Home",
+        "hardestPosition": 6
+    },
+
+ "Entity32": {
+        "country": "AR",
+        "hardest": "Silent Factory I",
+        "hardestPosition": 9
+    },
+
+     "Lichagrana": {
+        "country": "AR",
+        "hardest": "Polis",
+        "hardestPosition": 37
+    },
+
+    "Taiopro": {
+        "country": "AR",
+        "hardest": "Baseplate",
+        "hardestPosition": 44
+    }
+}

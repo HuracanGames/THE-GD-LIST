@@ -1,0 +1,40 @@
+{
+    "id": 27,
+    "name": "Super Clubstep",
+    "author": "Santiquemero",
+    "creators": [],
+    "verifier": "Santiquemero",
+    "verification": "https://www.youtube.com/watch?v=i4qwgS6vgHI",
+    "percentToQualify": "0",
+    "password": "Free To Copy",
+    "records": [
+         {
+            "user": "Cementerio",
+            "link": "",
+            "percent": 100,
+            "hz": 60
+        },
+       {
+            "user": "Bautx",
+            "link": "",
+            "percent": 100,
+            "hz": 60
+        }
+    ],
+    "Position History":
+[
+  { "date": "Agregado a la lista / ???", "position": 1 },
+  { "date": "???", "position": 3 },
+  { "date": "???", "position": 6 },
+  { "date": "???", "position": 10 },
+  { "date": "???", "position": 9 },
+  { "date": "???", "position": 10 },
+  { "date": "???", "position": 9 },
+{ "date": "???", "position": 10 },
+{ "date": "???", "position": 6 },
+{ "date": "???", "position": 8 },
+{ "date": "???", "position": 10 },
+{ "date": "19/08/2026", "position": 11 }
+]
+
+}
