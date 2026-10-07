@@ -1,0 +1,29 @@
+[
+    {
+        "Beginner Pack": {
+            "description": "A pack for beginners.",
+            "levels": [
+                43,
+                46,
+                47
+            ]
+        },
+
+        "Orbit Pack": {
+            "description": "A pack containing the levels inspired in orbit by mindcap.",
+            "levels": [
+                27,
+                17
+            ]
+        },
+
+        "Space Pack": {
+            "description": "A pack containing levels related to space.",
+            "levels": [
+                2,
+                6,
+                7
+            ]
+        }
+    }
+]

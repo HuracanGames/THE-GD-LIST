@@ -1,0 +1,24 @@
+{
+    "id": 35,
+    "name": "Thinking in Dark",
+    "author": "Santiquemero",
+    "creators": [],
+    "verifier": "Santiquemero",
+    "verification": "https://www.youtube.com/watch?v=mKrbyRkGZ9A",
+    "percentToQualify": "80",
+    "password": "Free To Copy",
+    "records": [
+         {
+            "user": "MateioPepeio",
+            "link": "",
+            "percent": 100,
+            "hz": 60
+        },
+        {
+            "user": "Bautx",
+            "link": "",
+            "percent": 96,
+            "hz": 60
+        }
+    ]
+}

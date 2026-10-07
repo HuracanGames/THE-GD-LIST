@@ -1,0 +1,24 @@
+{
+    "id": 2,
+    "name": "Baseplate",
+    "author": "Santiquemero",
+    "creators": [],
+    "verifier": "Santiquemero",
+    "verification": "",
+    "percentToQualify": "0",
+    "password": "Free To Copy",
+    "records": [
+         {
+            "user": "Taiopro",
+            "link": "",
+            "percent": 100,
+            "hz": 60
+        },
+        {
+            "user": "LolaproD",
+            "link": "",
+            "percent": 47,
+            "hz": 60
+        }
+    ]
+}

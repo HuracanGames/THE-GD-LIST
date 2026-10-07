@@ -1,0 +1,25 @@
+{
+    "id": 37,
+    "name": "Worst Code",
+    "author": "Santiquemero",
+    "creators": [],
+    "verifier": "Cementerio",
+    "verification": "",
+    "percentToQualify": "0",
+    "password": "Free To Copy",
+    "records": [
+         {
+            "user": "Santiquemero",
+            "link": "https://www.youtube.com/watch?v=4kqIuUWGVtk",
+            "percent": 100,
+            "hz": 60
+        },
+         {
+            "user": "Bautx",
+            "link": "",
+            "percent": 100,
+            "hz": 60
+        }
+       
+    ]
+}
