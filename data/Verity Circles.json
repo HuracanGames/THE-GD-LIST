@@ -1,18 +1,18 @@
 {
-    "id": 45,
-    "name": "Probaitit II",
+    "id": 54,
+    "name": "Verity Circles",
     "author": "Santiquemero",
     "creators": [],
-    "verifier": "Santiquemero",
+    "verifier": "Bautx",
     "verification": "",
-    "percentToQualify": "0",
+    "percentToQualify": "56",
     "password": "Free To Copy",
     "records": [
          {
-            "user": "Bautx",
+            "user": "Santiquemero",
             "link": "",
             "percent": 100,
-            "hz": 60
+            "hz": 120
         }
     ]
 }

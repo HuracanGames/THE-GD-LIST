@@ -12,17 +12,17 @@
         "Orbit Pack": {
             "description": "A pack containing the levels inspired in orbit by mindcap.",
             "levels": [
-                27,
-                17
+                29,
+                20
             ]
         },
 
         "Space Pack": {
             "description": "A pack containing levels related to space.",
             "levels": [
-                2,
-                6,
-                7
+                4,
+                8,
+                11
             ]
         }
     }

@@ -9,36 +9,36 @@
     "Bautx": {
         "country": "AR",
         "hardest": "Thermodynamix",
-        "hardestPosition": 2
+        "hardestPosition": 3
     },
 
     "MateioPepeio": {
         "country": "AR",
         "hardest": "Super Blaster",
-        "hardestPosition": 4
+        "hardestPosition": 6
     },
 
     "Cementerio": {
         "country": "AR",
-        "hardest": "The Road to Home",
-        "hardestPosition": 6
+        "hardest": "Heliopolis VF",
+        "hardestPosition": 1
     },
 
  "Entity32": {
         "country": "AR",
         "hardest": "Silent Factory I",
-        "hardestPosition": 9
+        "hardestPosition": 15
     },
 
      "Lichagrana": {
         "country": "AR",
         "hardest": "Polis",
-        "hardestPosition": 37
+        "hardestPosition": 42
     },
 
     "Taiopro": {
         "country": "AR",
         "hardest": "Baseplate",
-        "hardestPosition": 44
+        "hardestPosition": 49
     }
 }
