@@ -1,25 +1,37 @@
+
+/* ========================================
+   ESTILOS GENERALES
+======================================== */
+
 .page-list .list-container,
 .page-list .level-container,
 .page-list .meta-container {
     padding-block: 2rem;
 }
+
 .page-list .list-container {
     padding-inline: 1rem;
+    min-width: 0;
 }
+
 .page-list .meta-container {
     padding-right: 2rem;
 }
 
 .page-list .list {
     table-layout: auto;
+    width: 100%;
 }
+
 .page-list .list .rank {
     text-align: end;
     padding-right: 1rem;
 }
+
 .page-list .list .level {
     width: 100%;
 }
+
 .page-list .list .level button {
     background-color: var(--color-background);
     color: var(--color-on-background);
@@ -30,20 +42,376 @@
     word-break: normal;
     overflow-wrap: anywhere;
     cursor: pointer;
+    font: inherit;
+    font-weight: 400;
+    width: 100%;
 }
+
 .page-list .list .level.error button {
     color: var(--color-error);
     cursor: not-allowed;
     text-decoration: line-through;
 }
+
 .page-list .list .level button:hover {
     background-color: var(--color-background-hover);
     color: var(--color-on-background-hover);
 }
+
 .page-list .list .level.active button {
     background-color: var(--color-primary);
     color: var(--color-on-primary);
+    font-weight: 400;
 }
+
+/* ========================================
+   SELECTOR DE VISTAS
+======================================== */
+
+.page-list .list-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.page-list .list-tabs button {
+    padding: 0.7rem 1.25rem;
+    border: 1px solid rgba(128, 128, 128, 0.25);
+    border-radius: 0.6rem;
+    background: rgba(128, 128, 128, 0.08);
+    color: var(--color-on-background);
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 700;
+    transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.page-list .list-tabs button:hover {
+    background: rgba(128, 128, 128, 0.16);
+}
+
+.page-list .list-tabs button.active {
+    background: var(--color-primary);
+    color: var(--color-on-primary);
+    border-color: transparent;
+}
+
+/* ========================================
+   CLASSIC: NOMBRES DE LOS NIVELES
+======================================== */
+
+/* Conservar el fondo original y suavizar el texto */
+
+.page-list .list:not(.list--cards) .level button {
+    background-color: var(--color-background);
+    color: var(--color-on-background);
+    font-weight: 400;
+}
+
+/* Conservar el fondo al pasar el cursor */
+
+.page-list .list:not(.list--cards) .level button:hover {
+    background-color: var(--color-background-hover);
+    color: var(--color-on-background-hover);
+}
+
+/* Mantener el fondo del nivel seleccionado */
+
+.page-list .list:not(.list--cards) .level.active button {
+    background-color: var(--color-primary);
+    color: var(--color-on-primary);
+    font-weight: 400;
+}
+
+/* ========================================
+   BOXES: CONTENEDOR Y TARJETAS
+======================================== */
+
+.page-list .list-container--cards {
+    display: block;
+    grid-column: 1 / -1;
+    order: 1;
+    width: 100%;
+    max-width: none;
+    min-width: 0;
+    height: auto;
+    max-height: none;
+    padding: 2rem;
+    overflow: visible;
+    box-sizing: border-box;
+    justify-self: stretch;
+}
+
+.page-list .list--cards {
+    display: block;
+    width: 100%;
+    max-width: none;
+    min-width: 0;
+    height: auto;
+    max-height: none;
+    table-layout: fixed;
+    border-collapse: separate;
+    border-spacing: 0 1rem;
+    margin: 0;
+    overflow: visible;
+    font-size: 1rem;
+}
+
+/* Tarjetas de niveles */
+
+.page-list .list--cards tr:not(.list-section):not(.expanded-level-row) {
+    display: grid;
+    grid-template-columns: 5rem minmax(0, 1fr);
+    align-items: stretch;
+    width: 100%;
+    max-width: none;
+    min-width: 0;
+    margin: 0 0 1rem;
+    border: 1px solid rgba(128, 128, 128, 0.22);
+    border-radius: 1rem;
+    overflow: hidden;
+    background: var(--color-background);
+    box-sizing: border-box;
+}
+
+.page-list .list--cards tr:not(.list-section):not(.expanded-level-row):hover {
+    border-color: rgba(128, 128, 128, 0.6);
+}
+
+.page-list .list--cards tr.list-card-active {
+    border-color: var(--color-primary);
+}
+
+/* Puesto del nivel */
+
+.page-list .list--cards .rank {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 0.4rem;
+    text-align: center;
+    background: rgba(128, 128, 128, 0.09);
+}
+
+.page-list .list--cards .rank p {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 800;
+}
+
+/* Botón de cada tarjeta */
+
+.page-list .list--cards .level {
+    display: block;
+    width: 100%;
+    min-width: 0;
+}
+
+.page-list .list--cards .level button {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    width: 100%;
+    min-width: 0;
+    min-height: 11rem;
+    height: 100%;
+    padding: 1.25rem 1.5rem;
+    border-radius: 0;
+    background: transparent;
+    text-align: start;
+    box-sizing: border-box;
+}
+
+.page-list .list--cards .level button:hover {
+    background: rgba(128, 128, 128, 0.1);
+    color: var(--color-on-background);
+}
+
+.page-list .list--cards .level.active button {
+    background: var(--color-primary);
+    color: var(--color-on-primary);
+}
+
+.page-list .list--cards .level.error button {
+    color: var(--color-error);
+}
+
+/* ========================================
+   MINIATURAS
+======================================== */
+
+.page-list .level-thumbnail {
+    display: flex;
+    flex: 0 0 240px;
+    width: 240px;
+    aspect-ratio: 16 / 9;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 0.65rem;
+    background: #252525;
+}
+
+.page-list .level-thumbnail img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.page-list .level-thumbnail-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    color: white;
+    font-size: 1.75rem;
+    font-weight: 700;
+    background: #252525;
+}
+
+/* Texto de las tarjetas */
+
+.page-list .level-card-text {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.6rem;
+    min-width: 0;
+}
+
+.page-list .level-card-name {
+    font-size: 1.2rem;
+    font-weight: 700;
+    overflow-wrap: anywhere;
+}
+
+.page-list .level-card-author {
+    opacity: 0.7;
+    font-size: 1rem;
+    overflow-wrap: anywhere;
+}
+
+/* ========================================
+   SEPARADORES EXTENDED Y VOYAGE
+======================================== */
+
+.page-list .list-section td {
+    padding: 1.5rem 0;
+    text-align: center;
+}
+
+.page-list .list-section p {
+    margin: 0;
+    text-align: center;
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
+.page-list .list-section--extended p {
+    color: orange !important;
+}
+
+.page-list .list-section--voyage p {
+    color: violet !important;
+}
+
+.page-list .list--cards .list-section {
+    display: block;
+    width: 100%;
+    margin: 1.5rem 0 0.75rem;
+    border: none;
+    background: transparent;
+    overflow: visible;
+}
+
+.page-list .list--cards .list-section td {
+    display: block;
+    width: 100%;
+    padding: 1rem 0;
+    box-sizing: border-box;
+}
+
+/* ========================================
+   DETALLES DESPLEGADOS EN BOXES
+======================================== */
+
+.page-list .list--cards .expanded-level-row {
+    display: block;
+    width: 100%;
+    margin: 0;
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    overflow: visible;
+}
+
+.page-list .list--cards .expanded-level-row > td {
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: none;
+    box-sizing: border-box;
+}
+
+.page-list .expanded-level {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    width: 100%;
+    min-width: 0;
+    margin: 0.25rem 0 1rem;
+    padding: 1.5rem;
+    box-sizing: border-box;
+    border: 1px solid var(--color-primary);
+    border-radius: 0.75rem;
+    background: var(--color-background);
+}
+
+.page-list .expanded-level h2,
+.page-list .expanded-level h3 {
+    margin: 0;
+}
+
+.page-list .expanded-level .video {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    height: auto;
+    border: 0;
+    border-radius: 0.5rem;
+}
+
+.page-list .expanded-stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+.page-list .expanded-stats > div {
+    min-width: 0;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    background: rgba(128, 128, 128, 0.1);
+    overflow-wrap: anywhere;
+}
+
+.page-list .expanded-stats p {
+    margin-bottom: 0;
+}
+
+.page-list .expanded-level .records {
+    width: 100%;
+    max-width: 100%;
+}
+
+/* ========================================
+   PANEL ORIGINAL DE CLASSIC
+======================================== */
+
 .page-list .level-container .level {
     display: flex;
     flex-direction: column;
@@ -51,124 +419,299 @@
     padding-right: 2rem;
     max-width: 48rem;
 }
+
 .page-list .level-container .level .level-authors {
     display: grid;
     grid-template-columns: max-content 1fr;
     grid-auto-rows: max-content;
     gap: 1rem;
 }
+
 .page-list .level-container .level .video {
-    aspect-ratio: 16/9;
+    aspect-ratio: 16 / 9;
+    width: 100%;
 }
+
 .page-list .level-container .level .stats {
     display: flex;
     justify-content: space-evenly;
     text-align: center;
     gap: 2rem;
 }
+
 .page-list .level-container .level .stats li {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 1rem;
 }
+
+/* ========================================
+   RÉCORDS EN CLASSIC
+======================================== */
+
 .page-list .level-container .level .records {
-    table-layout: fixed;
+    width: 100%;
+    table-layout: auto;
 }
+
 .page-list .level-container .level .records tr td:not(:last-child) {
-    padding-right: 1rem;
+    padding-right: 0.75rem;
 }
+
 .page-list .level-container .level .records .percent,
 .page-list .level-container .level .records .user,
 .page-list .level-container .level .records .hz {
     padding-block: 1rem;
 }
-.page-list .level-container .level .records .user {
-    width: 100%;
+
+.page-list .level-container .level .records .percent {
+    width: 1%;
+    white-space: nowrap;
+    text-align: end;
+    padding-right: 1rem;
 }
-.page-list .level-container .level .records .percent,
+
+.page-list .level-container .level .records .user {
+    min-width: 0;
+    overflow-wrap: anywhere;
+    word-break: normal;
+}
+
+.page-list .level-container .level .records .user a,
+.page-list .level-container .level .records .user p {
+    overflow-wrap: anywhere;
+    word-break: normal;
+}
+
 .page-list .level-container .level .records .hz {
+    width: 1%;
+    white-space: nowrap;
     text-align: end;
 }
-.page-list .meta-container .og a:hover,
-.page-list .level-container .level .records a:hover {
-    text-decoration: underline;
+
+.page-list .level-container .level .records .mobile {
+    width: 1%;
+    white-space: nowrap;
 }
+
+/* ========================================
+   INFORMACIÓN SECUNDARIA Y CRÉDITOS
+======================================== */
+
 .page-list .meta {
     display: flex;
     flex-direction: column;
     gap: 2rem;
 }
+
 .page-list .meta .errors {
     display: flex;
     flex-direction: column;
     gap: 1rem;
 }
+
 .page-list .meta .errors .error {
     padding: 1rem;
     background-color: var(--color-error);
     color: var(--color-on-error);
     border-radius: 0.5rem;
 }
+
 .page-list .meta .editors {
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
 }
+
 .page-list .meta .editors li {
     display: flex;
     align-items: center;
     gap: 0.5rem;
 }
+
 .page-list .meta .editors li img {
     height: 1.25rem;
 }
-.page-list .meta .editors li a:hover {
+
+.page-list .meta .editors li a:hover,
+.page-list .meta-container .og a:hover,
+.page-list .level-container .level .records a:hover {
     text-decoration: underline;
 }
-.list-section td {
-    padding: 1.5rem 0;
-    text-align: center;
+
+/* ========================================
+   BOXES: CRÉDITOS ARRIBA DE LA LISTA
+======================================== */
+
+/* Ocultar el panel lateral de Classic */
+
+.page-list:has(.list-container--cards) .level-container {
+    display: none;
 }
 
-.list-section p {
+/* La página crece con todo su contenido */
+
+.page-list:has(.list-container--cards) {
+    display: flex;
+    flex-direction: column;
+    height: auto !important;
+    min-height: 100vh;
+    max-height: none !important;
+    overflow: visible !important;
+}
+
+/* Créditos, editores y requisitos primero */
+
+.page-list:has(.list-container--cards) .meta-container {
+    order: -1;
+    position: static;
+    width: 100%;
+    max-width: none;
+    min-width: 0;
+    height: auto;
+    max-height: none;
     margin: 0;
+    padding: 1.5rem;
+    overflow: visible;
+    box-sizing: border-box;
+}
+
+.page-list:has(.list-container--cards) .meta {
+    width: 100%;
+    max-width: 800px;
+    margin-inline: auto;
+    box-sizing: border-box;
+    font-size: 0.95rem;
+}
+
+.page-list:has(.list-container--cards) .meta .og,
+.page-list:has(.list-container--cards) .meta > h3 {
     text-align: center;
-    font-weight: 700;
 }
 
-.list-section--extended p {
-    color: orange !important;
+.page-list:has(.list-container--cards) .meta .editors {
+    width: fit-content;
+    max-width: 100%;
+    margin-inline: auto;
+    text-align: left;
 }
 
-.list-section--voyage p {
-    color: violet !important;
-}
-.list-tabs {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    margin-bottom: 2rem;
+/* Lista después de los créditos */
+
+.page-list:has(.list-container--cards) .list-container--cards {
+    order: 1;
+    width: 100%;
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
 }
 
-.list-tabs button {
-    padding: 0.8rem 1.5rem;
-    border: none;
-    border-radius: 10px;
-    background: rgba(128, 128, 128, 0.12);
-    cursor: pointer;
-    font-family: inherit;
-    font-weight: 700;
+/* Scroll de toda la página */
+
+.page-list:has(.list-container--cards),
+.page-list:has(.list-container--cards) .list-container--cards,
+.page-list:has(.list-container--cards) .list--cards,
+.page-list:has(.list-container--cards) .meta-container {
+    overscroll-behavior: auto;
 }
 
-.list-tabs button.active {
-    background: rgba(128, 128, 128, 0.25);
+/* ========================================
+   PANTALLAS PEQUEÑAS
+======================================== */
+
+@media (max-width: 700px) {
+    .page-list .list-container,
+    .page-list .level-container,
+    .page-list .meta-container {
+        padding-block: 1rem;
+    }
+
+    .page-list .list-container {
+        padding-inline: 0.5rem;
+    }
+
+    .page-list .level-container .level {
+        padding-right: 1rem;
+        padding-left: 1rem;
+    }
+
+    .page-list .meta-container {
+        padding-inline: 1rem;
+    }
+
+    .page-list .level-container .level .stats {
+        flex-wrap: wrap;
+        gap: 1.25rem;
+    }
+
+    /* Boxes en móvil */
+
+    .page-list .list-container--cards {
+        padding: 1rem 0.5rem;
+    }
+
+    .page-list .list--cards tr:not(.list-section):not(.expanded-level-row) {
+        grid-template-columns: 3.5rem minmax(0, 1fr);
+        margin-bottom: 0.8rem;
+    }
+
+    .page-list .list--cards .rank {
+        padding: 0.75rem 0.2rem;
+    }
+
+    .page-list .list--cards .rank p {
+        font-size: 1rem;
+    }
+
+    .page-list .list--cards .level button {
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        min-height: 8rem;
+        padding: 0.75rem;
+    }
+
+    .page-list .level-thumbnail {
+        flex: 0 0 125px;
+        width: 125px;
+    }
+
+    .page-list .level-card-text {
+        flex: 1 1 120px;
+    }
+
+    .page-list .level-card-name {
+        font-size: 1rem;
+    }
+
+    .page-list .level-card-author {
+        font-size: 0.85rem;
+    }
+
+    .page-list .expanded-level {
+        padding: 1rem;
+    }
+
+    .page-list .expanded-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .page-list:has(.list-container--cards) .meta-container {
+        padding-inline: 1rem;
+    }
 }
 
-.list-empty {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 300px;
+.list-section--principal td {
+    color: #e53935;
+    text-align: center;
+}
+
+.list-section--voyage td {
+    color: #9b59b6;
+    text-align: center;
+}
+
+.list-section--frontier td {
+    color: #3498db;
     text-align: center;
 }
