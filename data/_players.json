@@ -1,44 +1,56 @@
-
 {
     "Santiquemero": {
         "country": "AR",
-        "hardest": "Heliopolis VF",
-        "hardestPosition": 1
+        "hardest": "Flawless Wings",
+        "hardestPosition": 1,
+        "cubeUrl": "./assets/cubes/santiquemero.png"
     },
-
-    "Bautx": {
+    "Ghostface": {
         "country": "AR",
-        "hardest": "Thermodynamix",
-        "hardestPosition": 3
+        "hardest": "Short Challenge",
+        "hardestPosition": 59,
+        "cubeUrl": null
     },
-
+    "Lolapro": {
+        "country": "AR",
+        "hardest": "Short Challenge",
+        "hardestPosition": 59,
+        "cubeUrl": "./assets/cubes/lolapro.png"
+    },
     "MateioPepeio": {
         "country": "AR",
         "hardest": "Super Blaster",
-        "hardestPosition": 6
+        "hardestPosition": 10,
+        "cubeUrl": "./assets/cubes/mateiopepeio.png"
     },
-
+    "Bautx": {
+        "country": "AR",
+        "hardest": "Flawless Wings",
+        "hardestPosition": 1,
+        "cubeUrl": "./assets/cubes/bautx.png"
+    },
+    "Lichagrana": {
+        "country": "AR",
+        "hardest": "Polis",
+        "hardestPosition": 48,
+        "cubeUrl": "./assets/cubes/lichagrana.png"
+    },
     "Cementerio": {
         "country": "AR",
         "hardest": "Heliopolis VF",
-        "hardestPosition": 1
+        "hardestPosition": 3,
+        "cubeUrl": "./assets/cubes/cementerio.png"
     },
-
- "Entity32": {
+    "Entity32": {
         "country": "AR",
         "hardest": "Silent Factory I",
-        "hardestPosition": 15
+        "hardestPosition": 23,
+        "cubeUrl": null
     },
-
-     "Lichagrana": {
-        "country": "AR",
-        "hardest": "Polis",
-        "hardestPosition": 42
-    },
-
     "Taiopro": {
         "country": "AR",
         "hardest": "Baseplate",
-        "hardestPosition": 49
+        "hardestPosition": 55,
+        "cubeUrl": null
     }
 }

@@ -12,8 +12,8 @@
         "Orbit Pack": {
             "description": "A pack containing the levels inspired in orbit by mindcap.",
             "levels": [
-                29,
-                20
+                "Orbicalty",
+                "Orbicalty II"
             ]
         },
 
