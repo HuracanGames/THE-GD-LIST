@@ -1,0 +1,48 @@
+{
+    "id": 58,
+    "name": "Short Challenge",
+    "author": "Santiquemero",
+    "creators": [],
+    "verifier": "Santiquemero",
+    "verification": "",
+    "percentToQualify": "0",
+    "password": "Free To Copy",
+    "records": [
+        {
+        "user": "Cementerio",
+        "link": "",
+        "percent": 100,
+        "hz": 120
+    },
+    {
+        "user": "MateioPepeio",
+        "link": "",
+        "percent": 100,
+        "hz": 60
+    },
+    {
+        "user": "GhostFace",
+        "link": "",
+        "percent": 100,
+        "hz": 60
+    },
+     {
+        "user": "Bautx",
+        "link": "",
+        "percent": 100,
+        "hz": 60
+    },
+     {
+        "user": "Taiopro",
+        "link": "",
+        "percent": 100,
+        "hz": 60
+    },
+    {
+        "user": "LolaproD",
+        "link": "",
+        "percent": 100,
+        "hz": 60
+    }
+    ]
+}

@@ -1,3 +1,4 @@
+
 import { store } from "../main.js";
 import { embed } from "../util.js";
 import { score } from "../score.js";
@@ -23,25 +24,74 @@ export default {
         </main>
 
         <main v-else class="page-list">
+            <div
+                class="list-container"
+                :class="{ 'list-container--cards': viewMode === 'cards' }"
+            >
+                <div class="list-tabs">
+                    <button
+                        :class="{ active: viewMode === 'classic' }"
+                        @click="setView('classic')"
+                    >
+                        Classic
+                    </button>
 
-            <div class="list-container">
-                <table class="list" v-if="list">
+                    <button
+                        :class="{ active: viewMode === 'cards' }"
+                        @click="setView('cards')"
+                    >
+                        Boxes
+                    </button>
+                </div>
 
-                    <template v-for="([level, err], i) in list">
+                <table
+                    class="list"
+                    :class="{ 'list--cards': viewMode === 'cards' }"
+                    v-if="list"
+                >
+                    <template v-for="([level, err], i) in list" :key="i">
+                        <tr
+                            v-if="i === 0"
+                            class="list-section list-section--principal"
+                        >
+                            <td colspan="2">
+                                <p class="type-label-lg">- Principal -</p>
+                            </td>
+                        </tr>
 
-                        <tr v-if="i === 20" class="list-section">
+                        <tr
+                            v-if="i === 20"
+                            class="list-section list-section--extended"
+                        >
                             <td colspan="2">
                                 <p class="type-label-lg">- Extended -</p>
                             </td>
                         </tr>
 
-                        <tr v-if="i === 40" class="list-section">
+                        <tr
+                            v-if="i === 40"
+                            class="list-section list-section--voyage"
+                        >
                             <td colspan="2">
                                 <p class="type-label-lg">- Voyage List -</p>
                             </td>
                         </tr>
 
-                        <tr>
+                        <tr
+                            v-if="i === 55"
+                            class="list-section list-section--frontier"
+                        >
+                            <td colspan="2">
+                                <p class="type-label-lg">- Frontier List -</p>
+                            </td>
+                        </tr>
+
+                        <tr
+                            :class="{
+                                'list-card-active': selected === i,
+                                'list-card-error': !level
+                            }"
+                        >
                             <td class="rank">
                                 <p class="type-label-lg">#{{ i + 1 }}</p>
                             </td>
@@ -49,27 +99,176 @@ export default {
                             <td
                                 class="level"
                                 :class="{
-                                    'active': selected == i,
-                                    'error': !level
+                                    active: selected === i,
+                                    error: !level
                                 }"
                             >
-                                <button @click="selected = i">
-                                    <span class="type-label-lg">
-                                        {{ level?.name || \`Error (\${err}.json)\` }}
+                                <button
+                                    @click="selectLevel(i)"
+                                    :disabled="!level"
+                                    :aria-expanded="viewMode === 'cards' && selected === i"
+                                >
+                                    <span
+                                        v-if="viewMode === 'cards'"
+                                        class="level-thumbnail"
+                                    >
+                                        <img
+                                            v-if="youtubeThumbnail(level) && !thumbnailErrors[i]"
+                                            :src="youtubeThumbnail(level)"
+                                            :alt="(level?.name || 'Level') + ' thumbnail'"
+                                            loading="lazy"
+                                            @error="thumbnailErrors[i] = true"
+                                        />
+
+                                        <span
+                                            v-else
+                                            class="level-thumbnail-placeholder"
+                                        >
+                                            GD
+                                        </span>
+                                    </span>
+
+                                    <span class="level-card-text">
+                                        <span class="level-card-name type-label-lg">
+                                            {{ level?.name || ('Error (' + err + '.json)') }}
+                                        </span>
+
+                                        <span
+                                            v-if="viewMode === 'cards' && level"
+                                            class="level-card-author"
+                                        >
+                                            {{ level.author || level.verifier || 'The GD List' }}
+                                        </span>
                                     </span>
                                 </button>
                             </td>
                         </tr>
 
-                    </template>
+                        <tr
+                            v-if="viewMode === 'cards' && selected === i && level"
+                            class="expanded-level-row"
+                        >
+                            <td colspan="2">
+                                <div class="expanded-level">
+                                    <h2>{{ level.name }}</h2>
 
+                                    <LevelAuthors
+                                        :author="level.author"
+                                        :creators="level.creators"
+                                        :verifier="level.verifier"
+                                    ></LevelAuthors>
+
+                                    <iframe
+                                        class="video"
+                                        :src="video"
+                                        title="Level verification video"
+                                        frameborder="0"
+                                        allowfullscreen
+                                    ></iframe>
+
+                                    <div class="expanded-stats">
+                                        <div>
+                                            <strong>Points when completed</strong>
+                                            <p>
+                                                {{ score(selected + 1, 100, level.percentToQualify) }}
+                                            </p>
+                                        </div>
+
+                                        <div>
+                                            <strong>ID</strong>
+                                            <p>{{ level.id }}</p>
+                                        </div>
+
+                                        <div>
+                                            <strong>Password</strong>
+                                            <p>{{ level.password || 'Free to Copy' }}</p>
+                                        </div>
+                                    </div>
+
+                                    <h3>Records</h3>
+
+                                    <p v-if="selected + 1 <= 75">
+                                        <strong>{{ level.percentToQualify }}%</strong>
+                                        or better to qualify
+                                    </p>
+
+                                    <p v-else-if="selected + 1 <= 150">
+                                        <strong>100%</strong>
+                                        or better to qualify
+                                    </p>
+
+                                    <p v-else>
+                                        This level does not accept new records.
+                                    </p>
+
+                                    <table class="records">
+                                        <tbody>
+                                            <tr
+                                                v-for="record in level.records || []"
+                                                :key="record.user + record.percent"
+                                                class="record"
+                                            >
+                                                <td class="percent">
+                                                    <p>{{ record.percent }}%</p>
+                                                </td>
+
+                                                <td class="user">
+                                                    <a
+                                                        :href="record.link"
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        class="type-label-lg"
+                                                    >
+                                                        {{ record.user }}
+                                                    </a>
+                                                </td>
+
+                                                <td class="mobile">
+                                                    <img
+                                                        v-if="record.mobile"
+                                                        :src="'/assets/phone-landscape' + (store.dark ? '-dark' : '') + '.svg'"
+                                                        alt="Mobile"
+                                                    />
+                                                </td>
+
+                                                <td class="hz">
+                                                    <p>{{ record.hz }}Hz</p>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                    <h3>Position History</h3>
+
+                                    <table class="records">
+                                        <tbody>
+                                            <tr
+                                                v-for="(entry, index) in level.PositionHistory || []"
+                                                :key="index"
+                                                class="record"
+                                            >
+                                                <td class="percent">
+                                                    <p>#{{ entry.position }}</p>
+                                                </td>
+
+                                                <td class="user">
+                                                    <p>{{ entry.date }}</p>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </td>
+                        </tr>
+                    </template>
                 </table>
             </div>
 
-            <div class="level-container">
-
+            <div
+                class="level-container"
+                v-if="viewMode === 'classic'"
+            >
                 <div class="level" v-if="level">
-
                     <h1>{{ level.name }}</h1>
 
                     <LevelAuthors
@@ -82,34 +281,25 @@ export default {
                         class="video"
                         id="videoframe"
                         :src="video"
+                        title="Level verification video"
                         frameborder="0"
                     ></iframe>
 
                     <ul class="stats">
-
                         <li>
-                            <div class="type-title-sm">
-                                Points when completed
-                            </div>
-                            <p>
-                                {{ score(selected + 1, 100, level.percentToQualify) }}
-                            </p>
+                            <div class="type-title-sm">Points when completed</div>
+                            <p>{{ score(selected + 1, 100, level.percentToQualify) }}</p>
                         </li>
 
                         <li>
-                            <div class="type-title-sm">
-                                ID
-                            </div>
+                            <div class="type-title-sm">ID</div>
                             <p>{{ level.id }}</p>
                         </li>
 
                         <li>
-                            <div class="type-title-sm">
-                                Password
-                            </div>
+                            <div class="type-title-sm">Password</div>
                             <p>{{ level.password || 'Free to Copy' }}</p>
                         </li>
-
                     </ul>
 
                     <h2>Records</h2>
@@ -129,82 +319,75 @@ export default {
                     </p>
 
                     <table class="records">
+                        <tbody>
+                            <tr
+                                v-for="record in level.records || []"
+                                :key="record.user + record.percent"
+                                class="record"
+                            >
+                                <td class="percent">
+                                    <p>{{ record.percent }}%</p>
+                                </td>
 
-                        <tr
-                            v-for="record in level.records"
-                            class="record"
-                        >
-                            <td class="percent">
-                                <p>{{ record.percent }}%</p>
-                            </td>
+                                <td class="user">
+                                    <a
+                                        :href="record.link"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        class="type-label-lg"
+                                    >
+                                        {{ record.user }}
+                                    </a>
+                                </td>
 
-                            <td class="user">
-                                <a
-                                    :href="record.link"
-                                    target="_blank"
-                                    class="type-label-lg"
-                                >
-                                    {{ record.user }}
-                                </a>
-                            </td>
+                                <td class="mobile">
+                                    <img
+                                        v-if="record.mobile"
+                                        :src="'/assets/phone-landscape' + (store.dark ? '-dark' : '') + '.svg'"
+                                        alt="Mobile"
+                                    />
+                                </td>
 
-                            <td class="mobile">
-                                <img
-                                    v-if="record.mobile"
-                                    :src="\`/assets/phone-landscape\${store.dark ? '-dark' : ''}.svg\`"
-                                    alt="Mobile"
-                                />
-                            </td>
-
-                            <td class="hz">
-                                <p>{{ record.hz }}Hz</p>
-                            </td>
-                        </tr>
-
+                                <td class="hz">
+                                    <p>{{ record.hz }}Hz</p>
+                                </td>
+                            </tr>
+                        </tbody>
                     </table>
 
                     <h2>Position History</h2>
 
                     <table class="records">
+                        <tbody>
+                            <tr
+                                v-for="(entry, i) in level.PositionHistory || []"
+                                :key="i"
+                                class="record"
+                            >
+                                <td class="percent">
+                                    <p>#{{ entry.position }}</p>
+                                </td>
 
-                        <tr
-                            v-for="entry in level.PositionHistory"
-                            class="record"
-                        >
-                            <td class="percent">
-                                <p>#{{ entry.position }}</p>
-                            </td>
-
-                            <td class="user">
-                                <p>{{ entry.date }}</p>
-                            </td>
-                        </tr>
-
+                                <td class="user">
+                                    <p>{{ entry.date }}</p>
+                                </td>
+                            </tr>
+                        </tbody>
                     </table>
-
                 </div>
 
-                <div
-                    v-else
-                    class="level"
-                    style="height: 100%; justify-content: center; align-items: center;"
-                >
+                <div v-else class="level level-empty">
                     <p>(ノಠ益ಠ)ノ彡┻━┻</p>
                 </div>
-
             </div>
 
             <div class="meta-container">
-
                 <div class="meta">
-
-                    <div
-                        class="errors"
-                        v-show="errors.length > 0"
-                    >
+                    <div class="errors" v-show="errors.length > 0">
                         <p
                             class="error"
-                            v-for="error of errors"
+                            v-for="error in errors"
+                            :key="error"
                         >
                             {{ error }}
                         </p>
@@ -216,6 +399,7 @@ export default {
                             <a
                                 href="https://tsl.pages.dev/"
                                 target="_blank"
+                                rel="noopener noreferrer"
                             >
                                 TheShittyList
                             </a>
@@ -223,15 +407,12 @@ export default {
                     </div>
 
                     <template v-if="editors">
-
                         <h3>List Editors</h3>
 
                         <ol class="editors">
-
-                            <li v-for="editor in editors">
-
+                            <li v-for="editor in editors" :key="editor.name">
                                 <img
-                                    :src="\`/assets/\${roleIconMap[editor.role]}\${store.dark ? '-dark' : ''}.svg\`"
+                                    :src="'/assets/' + roleIconMap[editor.role] + (store.dark ? '-dark' : '') + '.svg'"
                                     :alt="editor.role"
                                 />
 
@@ -239,19 +420,15 @@ export default {
                                     v-if="editor.link"
                                     class="type-label-lg link"
                                     target="_blank"
+                                    rel="noopener noreferrer"
                                     :href="editor.link"
                                 >
                                     {{ editor.name }}
                                 </a>
 
-                                <p v-else>
-                                    {{ editor.name }}
-                                </p>
-
+                                <p v-else>{{ editor.name }}</p>
                             </li>
-
                         </ol>
-
                     </template>
 
                     <h3>Submission Requirements</h3>
@@ -284,9 +461,7 @@ export default {
                         endwall, or the completion will be invalidated.
                     </p>
 
-                    <p>
-                        Do not use secret routes or bug routes
-                    </p>
+                    <p>Do not use secret routes or bug routes</p>
 
                     <p>
                         Do not use easy modes, only a record of the
@@ -299,11 +474,8 @@ export default {
                         falls off, then afterwards we never accept
                         records for said level
                     </p>
-
                 </div>
-
             </div>
-
         </main>
     `,
 
@@ -314,16 +486,29 @@ export default {
         selected: 0,
         errors: [],
         roleIconMap,
-        store
+        store,
+        thumbnailErrors: {},
+        toggledShowcase: false,
+
+        viewMode: ["classic", "cards"].includes(
+            localStorage.getItem("thegdlist-list-view")
+        )
+            ? localStorage.getItem("thegdlist-list-view")
+            : "classic",
     }),
 
     computed: {
-
         level() {
-            return this.list[this.selected][0];
+            return this.selected >= 0
+                ? this.list[this.selected]?.[0] || null
+                : null;
         },
 
         video() {
+            if (!this.level) {
+                return "";
+            }
+
             if (!this.level.showcase) {
                 return embed(this.level.verification);
             }
@@ -334,34 +519,39 @@ export default {
                     : this.level.verification
             );
         },
-
     },
 
     async mounted() {
+        if (this.viewMode === "cards") {
+            this.selected = -1;
+        }
 
-        this.list = await fetchList();
-        this.editors = await fetchEditors();
+        try {
+            this.list = await fetchList();
+            this.editors = await fetchEditors();
 
-        if (!this.list) {
+            if (!this.list) {
+                this.errors = [
+                    "Failed to load list. Retry in a few minutes or notify list staff.",
+                ];
+            } else {
+                this.errors.push(
+                    ...this.list
+                        .filter(([_, err]) => err)
+                        .map(([_, err]) => {
+                            return "Failed to load level. (" + err + ".json)";
+                        })
+                );
 
-            this.errors = [
-                "Failed to load list. Retry in a few minutes or notify list staff.",
-            ];
-
-        } else {
-
-            this.errors.push(
-                ...this.list
-                    .filter(([_, err]) => err)
-                    .map(([_, err]) => {
-                        return `Failed to load level. (${err}.json)`;
-                    })
-            );
-
-            if (!this.editors) {
-                this.errors.push("Failed to load list editors.");
+                if (!this.editors) {
+                    this.errors.push("Failed to load list editors.");
+                }
             }
-
+        } catch (error) {
+            console.error(error);
+            this.errors.push(
+                "Failed to load list. Retry in a few minutes or notify list staff."
+            );
         }
 
         this.loading = false;
@@ -370,5 +560,64 @@ export default {
     methods: {
         embed,
         score,
+
+        setView(view) {
+            this.viewMode = view;
+            localStorage.setItem("thegdlist-list-view", view);
+
+            if (view === "cards") {
+                this.selected = -1;
+            } else if (this.selected < 0) {
+                this.selected = 0;
+            }
+        },
+
+        selectLevel(index) {
+            if (this.viewMode === "cards") {
+                this.selected = this.selected === index ? -1 : index;
+            } else {
+                this.selected = index;
+            }
+        },
+
+        youtubeThumbnail(level) {
+            const url = level?.verification;
+
+            if (typeof url !== "string" || !url.trim()) {
+                return "";
+            }
+
+            let parsed;
+
+            try {
+                parsed = new URL(url.trim());
+            } catch {
+                return "";
+            }
+
+            const host = parsed.hostname.replace(/^www\./, "");
+            let id = "";
+
+            if (host === "youtu.be") {
+                id = parsed.pathname.split("/").filter(Boolean)[0] || "";
+            } else if (
+                host === "youtube.com" ||
+                host === "m.youtube.com" ||
+                host === "youtube-nocookie.com"
+            ) {
+                id =
+                    parsed.searchParams.get("v") ||
+                    parsed.pathname.match(
+                        /^\/(?:embed|shorts|live)\/([a-zA-Z0-9_-]{11})/
+                    )?.[1] ||
+                    "";
+            }
+
+            if (!/^[a-zA-Z0-9_-]{11}$/.test(id)) {
+                return "";
+            }
+
+            return "https://img.youtube.com/vi/" + id + "/hqdefault.jpg";
+        },
     },
 };

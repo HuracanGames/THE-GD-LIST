@@ -5,8 +5,14 @@
     "creators": [],
     "verifier": "Santiquemero",
     "verification": "https://www.youtube.com/watch?v=EtBofZGKUiA",
-    "percentToQualify": "86",
+    "percentToQualify": "78",
     "password": "Free To Copy",
     "records": [
+        {
+            "user": "Cementerio",
+            "link": "",
+            "percent": 92,
+            "hz": 120
+        }
     ]
 }
