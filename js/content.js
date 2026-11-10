@@ -1,4 +1,3 @@
-
 import { round, score } from './score.js';
 
 const dir = '/data';
@@ -37,6 +36,47 @@ export async function fetchList() {
         );
     } catch {
         console.error('Failed to load list.');
+        return null;
+    }
+}
+
+// Independent list: it does not participate in the main leaderboard or scoring.
+export async function fetchImpossibleList() {
+    const listResult = await fetch(`${dir}/_impossible_list.json`);
+
+    try {
+        const list = await listResult.json();
+
+        return await Promise.all(
+            list.map(async (path, rank) => {
+                const levelResult = await fetch(
+                    `${dir}/impossible-list/${path}.json`,
+                );
+
+                try {
+                    const level = await levelResult.json();
+
+                    return [
+                        {
+                            ...level,
+                            path,
+                            records: (level.records || []).sort(
+                                (a, b) => b.percent - a.percent,
+                            ),
+                        },
+                        null,
+                    ];
+                } catch {
+                    console.error(
+                        `Failed to load Impossible level #${rank + 1} ${path}.`,
+                    );
+
+                    return [null, path];
+                }
+            }),
+        );
+    } catch {
+        console.error('Failed to load Impossible Levels.');
         return null;
     }
 }
@@ -211,12 +251,11 @@ export async function fetchLeaderboard() {
             ...progressed,
         ].reduce((sum, record) => sum + record.score, 0);
 
-        // Completed levels are identified by their names.
-        const completedNames = new Set(
-            [...completed, ...verified].map(record =>
-                record.level.trim().toLowerCase()
-            )
-        );
+        // A level counts as completed if completed or verified.
+        const completedRanks = new Set([
+            ...completed.map(record => record.rank),
+            ...verified.map(record => record.rank),
+        ]);
 
         // Each completely completed pack gives +10 points.
         let packPoints = 0;
@@ -229,9 +268,7 @@ export async function fetchLeaderboard() {
             }
 
             const completedPack = packLevels.every(
-                levelName =>
-                    typeof levelName === 'string' &&
-                    completedNames.has(levelName.trim().toLowerCase())
+                rank => completedRanks.has(rank),
             );
 
             if (completedPack) {
@@ -253,90 +290,4 @@ export async function fetchLeaderboard() {
         result.sort((a, b) => b.total - a.total),
         errs,
     ];
-}
-
-// Impossible Levels
-export async function fetchImpossibleList() {
-    const listResult = await fetch(`${dir}/_impossible_list.json`);
-
-    try {
-        const list = await listResult.json();
-
-        return await Promise.all(
-            list.map(async (path, rank) => {
-                const levelResult = await fetch(`${dir}/${path}.json`);
-
-                try {
-                    const level = await levelResult.json();
-
-                    return [
-                        {
-                            ...level,
-                            path,
-                        },
-                        null,
-                    ];
-                } catch {
-                    console.error(
-                        `Failed to load Impossible Level #${rank + 1} ${path}.`,
-                    );
-
-                    return [null, path];
-                }
-            }),
-        );
-    } catch {
-        console.error('Failed to load Impossible Levels.');
-        return null;
-    }
-}
-
-// Unverified Levels
-export async function fetchUnverifiedList() {
-    const listResult = await fetch(`${dir}/_unverified_list.json`);
-
-    try {
-        const list = await listResult.json();
-
-        return await Promise.all(
-            list.map(async (path, rank) => {
-                const levelResult = await fetch(`${dir}/${path}.json`);
-
-                try {
-                    const level = await levelResult.json();
-
-                    return [
-                        {
-                            ...level,
-                            path,
-                        },
-                        null,
-                    ];
-                } catch {
-                    console.error(
-                        `Failed to load Unverified Level #${rank + 1} ${path}.`,
-                    );
-
-                    return [null, path];
-                }
-            }),
-        );
-    } catch {
-        console.error('Failed to load Unverified Levels.');
-        return null;
-    }
-}
-export async function fetchHistory() {
-    try {
-        const result = await fetch(`${dir}/history/_history.json`);
-
-        if (!result.ok) {
-            throw new Error('Failed to load history.');
-        }
-
-        return await result.json();
-    } catch (error) {
-        console.error('Failed to load Time Machine:', error);
-        return null;
-    }
 }
