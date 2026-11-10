@@ -35,4 +35,12 @@
       
         
     ]
+    ,
+    "rating":
+    {
+        "difficulty": "Easy",
+        "stars": 2,
+        "featured": false,
+        "demonType": null
+        }
 }

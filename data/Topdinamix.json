@@ -16,4 +16,12 @@
         }
        
     ]
+        ,
+    "rating":
+    {
+        "difficulty": "Hard",
+        "stars": 5,
+        "featured": false,
+        "demonType": null
+        }
 }

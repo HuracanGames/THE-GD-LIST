@@ -15,6 +15,13 @@
             "hz": 60
         }
     ]
-    
+    ,
+    "rating":
+    {
+        "difficulty": "Demon",
+        "stars": 10,
+        "featured": true,
+        "demonType": "Easy Demon"
+        }
 
 }

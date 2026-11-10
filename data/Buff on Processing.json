@@ -10,5 +10,12 @@
     "records": [
         
        
-    ]
+    ],
+    "rating":
+    {
+        "difficulty": "Insane",
+        "stars": 9,
+        "featured": true,
+        "demonType": null
+        }
 }

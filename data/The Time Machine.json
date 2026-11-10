@@ -9,4 +9,12 @@
     "password": "Free To Copy",
     "records": [
     ]
+        ,
+    "rating":
+    {
+        "difficulty": "Hard",
+        "stars": 4,
+        "featured": true,
+        "demonType": null
+        }
 }

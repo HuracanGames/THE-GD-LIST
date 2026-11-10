@@ -16,4 +16,12 @@
         }
        
     ]
+     ,
+    "rating":
+    {
+        "difficulty": "Normal",
+        "stars": 3,
+        "featured": true,
+        "demonType": null
+        }
 }

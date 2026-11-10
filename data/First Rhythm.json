@@ -1,0 +1,20 @@
+{
+    "id": 72,
+    "name": "First Rhythm",
+    "author": "Santiquemero",
+    "creators": [],
+    "verifier": "Santiquemero",
+    "verification": "",
+    "percentToQualify": "0",
+    "password": "Free To Copy",
+    "records": [
+    ]
+        ,
+    "rating":
+    {
+        "difficulty": "Easy",
+        "stars": 2,
+        "featured": true,
+        "demonType": null
+        }
+}

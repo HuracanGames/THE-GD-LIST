@@ -8,5 +8,19 @@
     "percentToQualify": "0",
     "password": "Free To Copy",
     "records": [
+        {
+            "user": "Bautx",
+            "link": "",
+            "percent": 100,
+            "hz": 60
+        }
     ]
+    ,
+    "rating":
+    {
+        "difficulty": "Insane",
+        "stars": 8,
+        "featured": true,
+        "demonType": null
+        }
 }

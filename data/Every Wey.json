@@ -8,5 +8,12 @@
     "percentToQualify": "34",
     "password": "Free To Copy",
     "records": [      
-    ]
+    ],
+    "rating":
+    {
+        "difficulty": "Insane",
+        "stars": 8,
+        "featured": false,
+        "demonType": null
+        }
 }

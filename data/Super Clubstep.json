@@ -36,5 +36,12 @@
 { "date": "???", "position": 10 },
 { "date": "19/08/2026", "position": 11 }
 ]
-
+,
+    "rating":
+    {
+        "difficulty": "Demon",
+        "stars": 10,
+        "featured": true,
+        "demonType": "Easy Demon"
+        }
 }

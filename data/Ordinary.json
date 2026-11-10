@@ -1,0 +1,20 @@
+{
+    "id": 69,
+    "name": "Ordinary",
+    "author": "Santiquemero",
+    "creators": [],
+    "verifier": "Santiquemero",
+    "verification": "",
+    "percentToQualify": "59",
+    "password": "Free To Copy",
+    "records": [
+    ]
+    ,
+    "rating":
+    {
+        "difficulty": "Demon",
+        "stars": 10,
+        "featured": true,
+        "demonType": "Easy Demon"
+        }
+}
