@@ -2,7 +2,14 @@
 import { store } from "../main.js";
 import { embed } from "../util.js";
 import { score } from "../score.js";
-import { fetchEditors, fetchList } from "../content.js";
+
+import {
+    fetchEditors,
+    fetchList,
+    fetchImpossibleList,
+    fetchUnverifiedList,
+    fetchHistory
+} from "../content.js";
 
 import Spinner from "../components/Spinner.js";
 import LevelAuthors from "../components/List/LevelAuthors.js";
@@ -42,16 +49,377 @@ export default {
                     >
                         Boxes
                     </button>
+
+                    <button
+                        :class="{ active: viewMode === 'time-machine' }"
+                        @click="setView('time-machine')"
+                    >
+                        Time Machine
+                    </button>
+
+                    <button
+                        class="list-settings-button"
+                        @click="settingsOpen = !settingsOpen"
+                        :aria-expanded="settingsOpen"
+                        title="List settings"
+                    >
+                        ⚙
+                    </button>
                 </div>
 
+                <div v-if="settingsOpen" class="list-settings">
+                    <h3>List Settings</h3>
+
+                    <label>
+                        <input
+                            type="checkbox"
+                            :checked="showImpossible"
+                            @change="toggleImpossible"
+                        />
+                        Impossible Levels
+                    </label>
+
+                    <label>
+                        <input
+                            type="checkbox"
+                            :checked="showUnverified"
+                            @change="toggleUnverified"
+                        />
+                        Unverified
+                    </label>
+
+                    <label>
+                        <input
+                            type="checkbox"
+                            :checked="showLegacy"
+                            @change="toggleLegacy"
+                        />
+                        LEGACY
+                    </label>
+                </div>
+
+                <!-- TIME MACHINE -->
+                <section
+                    v-if="viewMode === 'time-machine'"
+                    class="time-machine"
+                >
+                    <h2>Time Machine</h2>
+
+                    <p>
+                        Explore previous versions of The GD List
+                        and compare their rankings.
+                    </p>
+
+                    <div v-if="!history.length" class="time-machine-empty">
+                        <p>No historical snapshots available.</p>
+                        <p>
+                            Check that data/history/_history.json
+                            exists and contains snapshots.
+                        </p>
+                    </div>
+
+                    <template v-else>
+                        <div class="time-machine-controls">
+                            <div>
+                                <label for="history-date">
+                                    Select a date
+                                </label>
+
+                                <select
+                                    id="history-date"
+                                    v-model.number="selectedHistoryIndex"
+                                >
+                                    <option
+                                        v-for="option in historyOptions"
+                                        :key="option.index"
+                                        :value="option.index"
+                                    >
+                                        {{ option.label }}
+                                    </option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label for="compare-date">
+                                    Compare with
+                                </label>
+
+                                <select
+                                    id="compare-date"
+                                    v-model.number="compareHistoryIndex"
+                                >
+                                    <option :value="-1">
+                                        No comparison
+                                    </option>
+
+                                    <option
+                                        v-for="option in historyOptions"
+                                        :key="'compare-' + option.index"
+                                        :value="option.index"
+                                        :disabled="option.index === selectedHistoryIndex"
+                                    >
+                                        {{ option.label }}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div
+                            v-if="selectedHistory"
+                            class="time-machine-info"
+                        >
+                            <h3>
+                                {{ formatHistoryDate(selectedHistory.date) }}
+                            </h3>
+
+                            <p>
+                                {{ selectedHistory.levels.length }}
+                                levels in this snapshot.
+                            </p>
+                        </div>
+
+                        <div
+                            v-if="selectedHistory && compareHistory"
+                            class="time-machine-comparison"
+                        >
+                            <h3>Comparison</h3>
+
+                            <p>
+                                Comparing
+                                {{ formatHistoryDate(selectedHistory.date) }}
+                                with
+                                {{ formatHistoryDate(compareHistory.date) }}.
+                            </p>
+
+                            <div class="time-machine-stats">
+                                <div>
+                                    <strong>{{ comparisonStats.improved }}</strong>
+                                    <span>Improved</span>
+                                </div>
+
+                                <div>
+                                    <strong>{{ comparisonStats.declined }}</strong>
+                                    <span>Declined</span>
+                                </div>
+
+                                <div>
+                                    <strong>{{ comparisonStats.new }}</strong>
+                                    <span>New levels</span>
+                                </div>
+
+                                <div>
+                                    <strong>{{ comparisonStats.removed }}</strong>
+                                    <span>Removed levels</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="time-machine-table-wrapper">
+                            <table class="list time-machine-table">
+                                <thead>
+                                    <tr>
+                                        <th>Rank</th>
+                                        <th>Level</th>
+                                        <th v-if="compareHistory">
+                                            Change
+                                        </th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    <tr
+                                        v-for="(levelName, index) in selectedHistory?.levels || []"
+                                        :key="index + '-' + levelName"
+                                    >
+                                        <td class="rank">
+                                            <p class="type-label-lg">
+                                                #{{ index + 1 }}
+                                            </p>
+                                        </td>
+
+                                        <td class="level">
+                                            <span class="level-card-name type-label-lg">
+                                                {{ levelName }}
+                                            </span>
+                                        </td>
+
+                                        <td
+                                            v-if="compareHistory"
+                                            class="time-machine-change"
+                                        >
+                                            <span
+                                                :class="getLevelChange(levelName).class"
+                                            >
+                                                {{ getLevelChange(levelName).text }}
+                                            </span>
+                                        </td>
+                                    </tr>
+
+                                    <tr
+                                        v-if="selectedHistory?.levels?.length === 0"
+                                    >
+                                        <td colspan="3">
+                                            No levels in this snapshot.
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div
+                            v-if="compareHistory && comparisonRemoved.length"
+                            class="time-machine-removed"
+                        >
+                            <h3>Removed levels</h3>
+
+                            <p>
+                                These levels appeared in the comparison
+                                snapshot but are missing from the selected one.
+                            </p>
+
+                            <ul>
+                                <li
+                                    v-for="item in comparisonRemoved"
+                                    :key="item.name"
+                                >
+                                    {{ item.name }}
+                                    <span>#{{ item.position }}</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </template>
+                </section>
+
+                <!-- Level Search -->
+                <div
+                    class="list-search"
+                    v-if="viewMode !== 'time-machine'"
+                >
+                    <input
+                        type="text"
+                        v-model="searchQuery"
+                        placeholder="Search levels, authors or verifiers..."
+                        aria-label="Search levels"
+                    />
+
+                    <button
+                        v-if="searchQuery"
+                        @click="searchQuery = ''"
+                        title="Clear search"
+                    >
+                        ✕
+                    </button>
+                </div>
+
+                <!-- Impossible Levels -->
                 <table
                     class="list"
                     :class="{ 'list--cards': viewMode === 'cards' }"
-                    v-if="list"
+                    v-if="viewMode !== 'time-machine' && showImpossible && filteredImpossibleList.length"
                 >
-                    <template v-for="([level, err], i) in list" :key="i">
+                    <tbody>
+                        <tr class="list-section">
+                            <td colspan="2">
+                                <p class="type-label-lg">
+                                    - Impossible Levels -
+                                </p>
+                            </td>
+                        </tr>
+
                         <tr
-                            v-if="i === 0"
+                            v-for="([level, err, originalIndex], i) in filteredImpossibleList"
+                            :key="'impossible-' + originalIndex"
+                            :class="{ 'list-card-error': !level }"
+                        >
+                            <td class="rank">
+                                <p class="type-label-lg">
+                                    #{{ originalIndex + 1 }}
+                                </p>
+                            </td>
+
+                            <td class="level">
+                                <div>
+                                    <span class="level-card-name type-label-lg">
+                                        {{ level?.name || ('Error (' + err + '.json)') }}
+                                    </span>
+
+                                    <span
+                                        v-if="level?.author"
+                                        class="level-card-author"
+                                    >
+                                        ({{ level.author }})
+                                    </span>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <!-- Unverified -->
+                <table
+                    class="list"
+                    :class="{ 'list--cards': viewMode === 'cards' }"
+                    v-if="viewMode !== 'time-machine' && showUnverified && filteredUnverifiedList.length"
+                >
+                    <tbody>
+                        <tr class="list-section">
+                            <td colspan="2">
+                                <p class="type-label-lg">
+                                    - Unverified -
+                                </p>
+                            </td>
+                        </tr>
+
+                        <tr
+                            v-for="([level, err, originalIndex], i) in filteredUnverifiedList"
+                            :key="'unverified-' + originalIndex"
+                            :class="{ 'list-card-error': !level }"
+                        >
+                            <td class="rank">
+                                <p class="type-label-lg">
+                                    #{{ originalIndex + 1 }}
+                                </p>
+                            </td>
+
+                            <td class="level">
+                                <div>
+                                    <span class="level-card-name type-label-lg">
+                                        {{ level?.name || ('Error (' + err + '.json)') }}
+                                    </span>
+
+                                    <span
+                                        v-if="level?.author"
+                                        class="level-card-author"
+                                    >
+                                        ({{ level.author }})
+                                    </span>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <!-- Main List -->
+                <table
+                    class="list"
+                    :class="{ 'list--cards': viewMode === 'cards' }"
+                    v-if="viewMode !== 'time-machine' && list"
+                >
+                    <template
+                        v-for="([level, err, originalIndex], i) in filteredList"
+                        :key="originalIndex"
+                    >
+                        <tr
+                            v-if="i === 0 && searchQuery.trim()"
+                            class="list-section"
+                        >
+                            <td colspan="2">
+                                <p class="type-label-lg">- Search Results -</p>
+                            </td>
+                        </tr>
+
+                        <tr
+                            v-if="!searchQuery.trim() && originalIndex === 0"
                             class="list-section list-section--principal"
                         >
                             <td colspan="2">
@@ -60,7 +428,7 @@ export default {
                         </tr>
 
                         <tr
-                            v-if="i === 20"
+                            v-if="!searchQuery.trim() && originalIndex === 20 && !showLegacy"
                             class="list-section list-section--extended"
                         >
                             <td colspan="2">
@@ -69,7 +437,16 @@ export default {
                         </tr>
 
                         <tr
-                            v-if="i === 40"
+                            v-if="!searchQuery.trim() && originalIndex === 20 && showLegacy"
+                            class="list-section"
+                        >
+                            <td colspan="2">
+                                <p class="type-label-lg">- LEGACY -</p>
+                            </td>
+                        </tr>
+
+                        <tr
+                            v-if="!searchQuery.trim() && originalIndex === 40 && !showLegacy"
                             class="list-section list-section--voyage"
                         >
                             <td colspan="2">
@@ -78,7 +455,7 @@ export default {
                         </tr>
 
                         <tr
-                            v-if="i === 55"
+                            v-if="!searchQuery.trim() && originalIndex === 55 && !showLegacy"
                             class="list-section list-section--frontier"
                         >
                             <td colspan="2">
@@ -88,36 +465,36 @@ export default {
 
                         <tr
                             :class="{
-                                'list-card-active': selected === i,
+                                'list-card-active': selected === originalIndex,
                                 'list-card-error': !level
                             }"
                         >
                             <td class="rank">
-                                <p class="type-label-lg">#{{ i + 1 }}</p>
+                                <p class="type-label-lg">#{{ originalIndex + 1 }}</p>
                             </td>
 
                             <td
                                 class="level"
                                 :class="{
-                                    active: selected === i,
+                                    active: selected === originalIndex,
                                     error: !level
                                 }"
                             >
                                 <button
-                                    @click="selectLevel(i)"
+                                    @click="selectLevel(originalIndex)"
                                     :disabled="!level"
-                                    :aria-expanded="viewMode === 'cards' && selected === i"
+                                    :aria-expanded="viewMode === 'cards' && selected === originalIndex"
                                 >
                                     <span
                                         v-if="viewMode === 'cards'"
                                         class="level-thumbnail"
                                     >
                                         <img
-                                            v-if="youtubeThumbnail(level) && !thumbnailErrors[i]"
+                                            v-if="youtubeThumbnail(level) && !thumbnailErrors[originalIndex]"
                                             :src="youtubeThumbnail(level)"
                                             :alt="(level?.name || 'Level') + ' thumbnail'"
                                             loading="lazy"
-                                            @error="thumbnailErrors[i] = true"
+                                            @error="thumbnailErrors[originalIndex] = true"
                                         />
 
                                         <span
@@ -145,7 +522,7 @@ export default {
                         </tr>
 
                         <tr
-                            v-if="viewMode === 'cards' && selected === i && level"
+                            v-if="viewMode === 'cards' && selected === originalIndex && level"
                             class="expanded-level-row"
                         >
                             <td colspan="2">
@@ -170,7 +547,7 @@ export default {
                                         <div>
                                             <strong>Points when completed</strong>
                                             <p>
-                                                {{ score(selected + 1, 100, level.percentToQualify) }}
+                                                {{ score(originalIndex + 1, 100, level.percentToQualify) }}
                                             </p>
                                         </div>
 
@@ -187,12 +564,12 @@ export default {
 
                                     <h3>Records</h3>
 
-                                    <p v-if="selected + 1 <= 75">
+                                    <p v-if="originalIndex + 1 <= 75">
                                         <strong>{{ level.percentToQualify }}%</strong>
                                         or better to qualify
                                     </p>
 
-                                    <p v-else-if="selected + 1 <= 150">
+                                    <p v-else-if="originalIndex + 1 <= 150">
                                         <strong>100%</strong>
                                         or better to qualify
                                     </p>
@@ -261,7 +638,23 @@ export default {
                             </td>
                         </tr>
                     </template>
+
+                    <tr v-if="filteredList.length === 0">
+                        <td colspan="2">
+                            <p class="type-label-lg" style="text-align: center; padding: 20px;">
+                                No levels found.
+                            </p>
+                        </td>
+                    </tr>
                 </table>
+
+                <p
+                    v-if="viewMode !== 'time-machine' && searchQuery.trim() && filteredImpossibleList.length === 0 && filteredUnverifiedList.length === 0 && filteredList.length === 0"
+                    class="type-label-lg"
+                    style="text-align: center; padding: 20px;"
+                >
+                    No levels found.
+                </p>
             </div>
 
             <div
@@ -381,7 +774,7 @@ export default {
                 </div>
             </div>
 
-            <div class="meta-container">
+            <div class="meta-container" v-if="viewMode !== 'time-machine'">
                 <div class="meta">
                     <div class="errors" v-show="errors.length > 0">
                         <p
@@ -481,7 +874,11 @@ export default {
 
     data: () => ({
         list: [],
+        impossibleList: [],
+        unverifiedList: [],
         editors: [],
+        history: [],
+
         loading: true,
         selected: 0,
         errors: [],
@@ -489,8 +886,23 @@ export default {
         store,
         thumbnailErrors: {},
         toggledShowcase: false,
+        settingsOpen: false,
 
-        viewMode: ["classic", "cards"].includes(
+        searchQuery: "",
+
+        selectedHistoryIndex: 0,
+        compareHistoryIndex: -1,
+
+        showImpossible:
+            localStorage.getItem("thegdlist-show-impossible") === "true",
+
+        showUnverified:
+            localStorage.getItem("thegdlist-show-unverified") === "true",
+
+        showLegacy:
+            localStorage.getItem("thegdlist-show-legacy") === "true",
+
+        viewMode: ["classic", "cards", "time-machine"].includes(
             localStorage.getItem("thegdlist-list-view")
         )
             ? localStorage.getItem("thegdlist-list-view")
@@ -519,6 +931,146 @@ export default {
                     : this.level.verification
             );
         },
+
+        filteredList() {
+            const query = this.searchQuery.trim();
+
+            return this.list
+                .map(([level, err], index) => [level, err, index])
+                .filter(([level]) => {
+                    return !query || this.matchesSearch(level, query);
+                });
+        },
+
+        filteredImpossibleList() {
+            const query = this.searchQuery.trim();
+
+            return this.impossibleList
+                .map(([level, err], index) => [level, err, index])
+                .filter(([level]) => {
+                    return !query || this.matchesSearch(level, query);
+                });
+        },
+
+        filteredUnverifiedList() {
+            const query = this.searchQuery.trim();
+
+            return this.unverifiedList
+                .map(([level, err], index) => [level, err, index])
+                .filter(([level]) => {
+                    return !query || this.matchesSearch(level, query);
+                });
+        },
+
+        historyOptions() {
+            const dateCounts = {};
+
+            return this.history.map((snapshot, index) => {
+                const date = snapshot.date || "Unknown date";
+
+                dateCounts[date] = (dateCounts[date] || 0) + 1;
+
+                const totalForDate = this.history.filter(
+                    item => item.date === date
+                ).length;
+
+                return {
+                    index,
+                    label: totalForDate > 1
+                        ? `${this.formatHistoryDate(date)} — Version ${dateCounts[date]}`
+                        : this.formatHistoryDate(date),
+                };
+            });
+        },
+
+        selectedHistory() {
+            return this.history[this.selectedHistoryIndex] || null;
+        },
+
+        compareHistory() {
+            return this.compareHistoryIndex >= 0
+                ? this.history[this.compareHistoryIndex] || null
+                : null;
+        },
+
+        comparisonStats() {
+            if (!this.selectedHistory || !this.compareHistory) {
+                return {
+                    improved: 0,
+                    declined: 0,
+                    new: 0,
+                    removed: 0,
+                };
+            }
+
+            let improved = 0;
+            let declined = 0;
+            let newLevels = 0;
+
+            const previousPositions = new Map(
+                this.compareHistory.levels.map((name, index) => [
+                    this.normalizeLevelName(name),
+                    index + 1,
+                ])
+            );
+
+            const currentNames = new Set(
+                this.selectedHistory.levels.map(name =>
+                    this.normalizeLevelName(name)
+                )
+            );
+
+            this.selectedHistory.levels.forEach((name, index) => {
+                const previousPosition = previousPositions.get(
+                    this.normalizeLevelName(name)
+                );
+
+                if (previousPosition === undefined) {
+                    newLevels++;
+                    return;
+                }
+
+                const currentPosition = index + 1;
+
+                if (currentPosition < previousPosition) {
+                    improved++;
+                } else if (currentPosition > previousPosition) {
+                    declined++;
+                }
+            });
+
+            const removed = this.compareHistory.levels.filter(
+                name => !currentNames.has(this.normalizeLevelName(name))
+            ).length;
+
+            return {
+                improved,
+                declined,
+                new: newLevels,
+                removed,
+            };
+        },
+
+        comparisonRemoved() {
+            if (!this.selectedHistory || !this.compareHistory) {
+                return [];
+            }
+
+            const currentNames = new Set(
+                this.selectedHistory.levels.map(name =>
+                    this.normalizeLevelName(name)
+                )
+            );
+
+            return this.compareHistory.levels
+                .map((name, index) => ({
+                    name,
+                    position: index + 1,
+                }))
+                .filter(item =>
+                    !currentNames.has(this.normalizeLevelName(item.name))
+                );
+        },
     },
 
     async mounted() {
@@ -529,6 +1081,18 @@ export default {
         try {
             this.list = await fetchList();
             this.editors = await fetchEditors();
+            this.impossibleList = await fetchImpossibleList();
+            this.unverifiedList = await fetchUnverifiedList();
+
+            const historyData = await fetchHistory();
+
+            this.history = Array.isArray(historyData?.snapshots)
+                ? historyData.snapshots.filter(snapshot =>
+                    snapshot &&
+                    typeof snapshot.date === "string" &&
+                    Array.isArray(snapshot.levels)
+                )
+                : [];
 
             if (!this.list) {
                 this.errors = [
@@ -547,6 +1111,36 @@ export default {
                     this.errors.push("Failed to load list editors.");
                 }
             }
+
+            if (!this.impossibleList) {
+                this.impossibleList = [];
+                this.errors.push("Failed to load Impossible Levels.");
+            } else {
+                this.errors.push(
+                    ...this.impossibleList
+                        .filter(([_, err]) => err)
+                        .map(([_, err]) => {
+                            return "Failed to load Impossible Level. (" + err + ".json)";
+                        })
+                );
+            }
+
+            if (!this.unverifiedList) {
+                this.unverifiedList = [];
+                this.errors.push("Failed to load Unverified Levels.");
+            } else {
+                this.errors.push(
+                    ...this.unverifiedList
+                        .filter(([_, err]) => err)
+                        .map(([_, err]) => {
+                            return "Failed to load Unverified Level. (" + err + ".json)";
+                        })
+                );
+            }
+
+            if (!historyData) {
+                this.errors.push("Failed to load Time Machine history.");
+            }
         } catch (error) {
             console.error(error);
             this.errors.push(
@@ -561,13 +1155,126 @@ export default {
         embed,
         score,
 
+        normalizeLevelName(name) {
+            return String(name || "").trim().toLowerCase();
+        },
+
+        formatHistoryDate(date) {
+            if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) {
+                return date;
+            }
+
+            const [year, month, day] = date.split("-");
+            return `${day}/${month}/${year}`;
+        },
+
+        getLevelChange(levelName) {
+            if (!this.compareHistory || !this.selectedHistory) {
+                return {
+                    text: "",
+                    class: "",
+                };
+            }
+
+            const oldPosition = this.compareHistory.levels.findIndex(
+                name =>
+                    this.normalizeLevelName(name) ===
+                    this.normalizeLevelName(levelName)
+            );
+
+            if (oldPosition === -1) {
+                return {
+                    text: "NEW",
+                    class: "time-machine-new",
+                };
+            }
+
+            const currentPosition = this.selectedHistory.levels.findIndex(
+                name =>
+                    this.normalizeLevelName(name) ===
+                    this.normalizeLevelName(levelName)
+            );
+
+            const difference = oldPosition - currentPosition;
+
+            if (difference > 0) {
+                return {
+                    text: `▲ ${difference}`,
+                    class: "time-machine-improved",
+                };
+            }
+
+            if (difference < 0) {
+                return {
+                    text: `▼ ${Math.abs(difference)}`,
+                    class: "time-machine-declined",
+                };
+            }
+
+            return {
+                text: "—",
+                class: "time-machine-same",
+            };
+        },
+
+        matchesSearch(level, query) {
+            if (!level) {
+                return false;
+            }
+
+            const searchText = [
+                level.name,
+                level.author,
+                level.verifier,
+                ...(Array.isArray(level.creators)
+                    ? level.creators.map(creator => {
+                        return typeof creator === "string"
+                            ? creator
+                            : creator?.name || "";
+                    })
+                    : []),
+            ]
+                .filter(Boolean)
+                .join(" ")
+                .toLowerCase();
+
+            return searchText.includes(query.toLowerCase());
+        },
+
+        toggleImpossible(event) {
+            this.showImpossible = event.target.checked;
+
+            localStorage.setItem(
+                "thegdlist-show-impossible",
+                this.showImpossible
+            );
+        },
+
+        toggleUnverified(event) {
+            this.showUnverified = event.target.checked;
+
+            localStorage.setItem(
+                "thegdlist-show-unverified",
+                this.showUnverified
+            );
+        },
+
+        toggleLegacy(event) {
+            this.showLegacy = event.target.checked;
+
+            localStorage.setItem(
+                "thegdlist-show-legacy",
+                this.showLegacy
+            );
+        },
+
         setView(view) {
             this.viewMode = view;
             localStorage.setItem("thegdlist-list-view", view);
 
             if (view === "cards") {
                 this.selected = -1;
-            } else if (this.selected < 0) {
+            } else if (view === "classic" && this.selected < 0) {
                 this.selected = 0;
             }
         },

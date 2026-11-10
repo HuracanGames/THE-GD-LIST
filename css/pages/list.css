@@ -715,3 +715,30 @@
     color: #3498db;
     text-align: center;
 }
+/* ========================================
+   TIME MACHINE: ESPACIADO
+======================================== */
+
+.page-list .time-machine-list {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 0.65rem;
+}
+
+.page-list .time-machine-list tr {
+    margin-bottom: 0.5rem;
+}
+
+.page-list .time-machine-list td {
+    padding: 0.75rem 1rem;
+    line-height: 1.6;
+}
+
+.page-list .time-machine-list button {
+    padding: 0.85rem 1rem;
+    line-height: 1.6;
+}
+
+.page-list .time-machine-list p {
+    margin: 0.35rem 0;
+}

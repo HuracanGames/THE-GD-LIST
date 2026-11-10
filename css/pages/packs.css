@@ -1,3 +1,4 @@
+
 .page-packs {
     padding: 4rem 2rem;
 }
@@ -19,6 +20,13 @@
     opacity: 0.7;
 }
 
+.packs-error,
+.packs-empty {
+    padding: 2rem;
+    text-align: center;
+    opacity: 0.7;
+}
+
 /* PACK */
 
 .pack {
@@ -27,6 +35,11 @@
     border-radius: 16px;
     background: rgba(128, 128, 128, 0.10);
     border: 1px solid rgba(128, 128, 128, 0.15);
+    transition: border-color 0.2s, background 0.2s;
+}
+
+.pack:hover {
+    border-color: rgba(128, 128, 128, 0.3);
 }
 
 /* HEADER DEL PACK */
@@ -37,6 +50,10 @@
     justify-content: space-between;
     gap: 2rem;
     margin-bottom: 1.5rem;
+}
+
+.pack-title {
+    min-width: 0;
 }
 
 .pack-header h2 {
@@ -68,6 +85,50 @@
     opacity: 0.7;
 }
 
+/* ESTADÍSTICAS */
+
+.pack-statistics {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.pack-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 0.9rem 1rem;
+    border-radius: 10px;
+    background: rgba(128, 128, 128, 0.08);
+}
+
+.pack-stat strong {
+    font-size: 1.35rem;
+}
+
+.pack-stat span {
+    font-size: 0.8rem;
+    opacity: 0.65;
+}
+
+/* PROGRESO */
+
+.pack-progress {
+    height: 8px;
+    overflow: hidden;
+    border-radius: 20px;
+    background: rgba(128, 128, 128, 0.18);
+    margin-bottom: 1.5rem;
+}
+
+.pack-progress-fill {
+    height: 100%;
+    border-radius: inherit;
+    background: var(--color-primary, #6688ff);
+    transition: width 0.4s ease;
+}
+
 /* NIVELES */
 
 .pack-levels {
@@ -83,6 +144,11 @@
     padding: 0.9rem 1rem;
     border-radius: 10px;
     background: rgba(128, 128, 128, 0.08);
+    transition: background 0.2s;
+}
+
+.pack-level:hover {
+    background: rgba(128, 128, 128, 0.14);
 }
 
 /* NÚMERO DENTRO DEL PACK */
@@ -90,6 +156,7 @@
 .pack-level-number {
     width: 30px;
     height: 30px;
+    flex-shrink: 0;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -98,9 +165,118 @@
     font-weight: 700;
 }
 
-/* POSICIÓN EN THE GD LIST */
+/* INFORMACIÓN DEL NIVEL */
+
+.pack-level-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.pack-level-name {
+    font-weight: 700;
+    overflow-wrap: anywhere;
+}
 
 .pack-level-position {
+    margin-top: 0.2rem;
+    font-size: 0.85rem;
+    opacity: 0.65;
+}
+
+/* COMPLETACIONES DEL NIVEL */
+
+.pack-level-completions {
+    flex-shrink: 0;
+    text-align: right;
     font-weight: 700;
-    font-size: 1rem;
+    font-size: 0.9rem;
+}
+
+.pack-level-completions span {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 400;
+    opacity: 0.65;
+}
+
+/* FOOTER */
+
+.pack-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(128, 128, 128, 0.15);
+    font-size: 0.85rem;
+    opacity: 0.8;
+}
+
+.pack-footer strong {
+    color: var(--color-primary, #6688ff);
+}
+
+.pack-status {
+    padding: 0.4rem 0.7rem;
+    border-radius: 20px;
+    background: rgba(128, 128, 128, 0.12);
+    font-size: 0.8rem;
+}
+
+.pack-status.complete {
+    background: rgba(70, 190, 120, 0.13);
+    color: #46be78;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 650px) {
+    .page-packs {
+        padding: 2.5rem 1rem;
+    }
+
+    .pack {
+        padding: 1.2rem;
+    }
+
+    .pack-header {
+        gap: 1rem;
+    }
+
+    .pack-statistics {
+        grid-template-columns: 1fr;
+        gap: 0.6rem;
+    }
+
+    .pack-stat {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .pack-stat strong {
+        font-size: 1.1rem;
+    }
+
+    .pack-level {
+        gap: 0.7rem;
+        padding: 0.8rem;
+    }
+
+    .pack-level-completions {
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 400px) {
+    .pack-count {
+        min-width: 65px;
+        padding: 0.6rem;
+    }
+
+    .pack-level-completions {
+        max-width: 75px;
+    }
 }

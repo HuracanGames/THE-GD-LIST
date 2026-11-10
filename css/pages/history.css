@@ -1,0 +1,282 @@
+/* ========================================
+   THE GD LIST - TIME MACHINE
+======================================== */
+
+.page-list .time-machine {
+    width: 100%;
+    padding: 1.5rem 1rem;
+    box-sizing: border-box;
+}
+
+/* Título y descripción */
+
+.page-list .time-machine > h2 {
+    margin-bottom: 1rem;
+}
+
+.page-list .time-machine > p {
+    margin-bottom: 1.5rem;
+    line-height: 1.7;
+}
+
+/* Fechas */
+
+.page-list .time-machine-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.page-list .time-machine-controls > div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    min-width: 200px;
+}
+
+.page-list .time-machine-controls label {
+    font-weight: 700;
+}
+
+.page-list .time-machine-controls select {
+    padding: 0.8rem 1rem;
+    border: 1px solid rgba(128, 128, 128, 0.35);
+    border-radius: 0.5rem;
+    background: var(--color-background);
+    color: var(--color-on-background);
+    font: inherit;
+}
+
+/* Información de la fecha */
+
+.page-list .time-machine-info {
+    margin: 2rem 0;
+    padding: 1.25rem;
+    border-radius: 0.75rem;
+    background: rgba(128, 128, 128, 0.08);
+}
+
+.page-list .time-machine-info h3 {
+    margin: 0 0 0.75rem;
+}
+
+.page-list .time-machine-info p {
+    margin: 0;
+}
+
+/* Comparación */
+
+.page-list .time-machine-comparison {
+    margin: 2rem 0;
+}
+
+.page-list .time-machine-comparison h3 {
+    margin-bottom: 0.75rem;
+}
+
+.page-list .time-machine-comparison > p {
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+.page-list .time-machine-stats {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+.page-list .time-machine-stats > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.65rem;
+    padding: 1.25rem 0.75rem;
+    border-radius: 0.75rem;
+    background: rgba(128, 128, 128, 0.1);
+    text-align: center;
+}
+
+.page-list .time-machine-stats strong {
+    font-size: 1.6rem;
+}
+
+.page-list .time-machine-stats span {
+    line-height: 1.4;
+}
+
+/* Tabla histórica */
+
+.page-list .time-machine-table-wrapper {
+    width: 100%;
+    margin-top: 2rem;
+    overflow-x: auto;
+}
+
+.page-list .time-machine-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 0.65rem;
+    table-layout: auto;
+}
+
+/* Encabezados */
+
+.page-list .time-machine-table thead th {
+    padding: 0.9rem 1rem;
+    text-align: left;
+    font-weight: 700;
+}
+
+/* Filas */
+
+.page-list .time-machine-table tbody tr {
+    background: rgba(128, 128, 128, 0.07);
+}
+
+/* Celdas: separación vertical y horizontal */
+
+.page-list .time-machine-table tbody td {
+    padding: 1rem 1.25rem;
+    line-height: 1.7;
+}
+
+/* Puesto */
+
+.page-list .time-machine-table .rank {
+    width: 1%;
+    white-space: nowrap;
+    text-align: center;
+    padding-inline: 1.5rem;
+}
+
+.page-list .time-machine-table .rank p {
+    margin: 0;
+    font-weight: 700;
+}
+
+/* Nombre del nivel */
+
+.page-list .time-machine-table .level {
+    min-width: 0;
+    padding-left: 1.5rem;
+}
+
+.page-list .time-machine-table .level span {
+    display: inline-block;
+    line-height: 1.7;
+    overflow-wrap: anywhere;
+}
+
+/* Cambios de posición */
+
+.page-list .time-machine-change {
+    width: 1%;
+    white-space: nowrap;
+    text-align: center;
+    font-weight: 700;
+}
+
+.page-list .time-machine-improved {
+    color: #2ecc71;
+}
+
+.page-list .time-machine-declined {
+    color: #e74c3c;
+}
+
+.page-list .time-machine-new {
+    color: #3498db;
+}
+
+.page-list .time-machine-same {
+    opacity: 0.6;
+}
+
+/* Niveles eliminados */
+
+.page-list .time-machine-removed {
+    margin-top: 2.5rem;
+}
+
+.page-list .time-machine-removed h3 {
+    margin-bottom: 1rem;
+}
+
+.page-list .time-machine-removed > p {
+    margin-bottom: 1.25rem;
+    line-height: 1.6;
+}
+
+.page-list .time-machine-removed ul {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 0;
+    list-style: none;
+}
+
+.page-list .time-machine-removed li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.9rem 1rem;
+    border-radius: 0.5rem;
+    background: rgba(128, 128, 128, 0.08);
+}
+
+.page-list .time-machine-removed li span {
+    white-space: nowrap;
+    font-weight: 700;
+}
+
+/* Sin historial */
+
+.page-list .time-machine-empty {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    border-radius: 0.75rem;
+    background: rgba(128, 128, 128, 0.08);
+    line-height: 1.7;
+}
+
+.page-list .time-machine-empty p {
+    margin: 0.5rem 0;
+}
+
+/* ========================================
+   MÓVILES
+======================================== */
+
+@media (max-width: 700px) {
+    .page-list .time-machine {
+        padding: 1rem 0.25rem;
+    }
+
+    .page-list .time-machine-stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .page-list .time-machine-controls {
+        flex-direction: column;
+    }
+
+    .page-list .time-machine-controls > div {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .page-list .time-machine-table tbody td {
+        padding: 0.85rem 0.6rem;
+    }
+
+    .page-list .time-machine-table .rank {
+        padding-inline: 0.6rem;
+    }
+
+    .page-list .time-machine-table .level {
+        padding-left: 0.75rem;
+    }
+}

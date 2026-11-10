@@ -23,4 +23,5 @@ export default [
     { path: '/changelog', component: Changelog },
     { path: '/challenge-list', component: ChallengeList },
     { path: '/comparator', component: Comparator },
+
 ];

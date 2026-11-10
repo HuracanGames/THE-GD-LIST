@@ -1,11 +1,12 @@
-
 import { fetchLeaderboard, fetchList } from '../content.js';
 import { localize } from '../util.js';
 import Spinner from '../components/Spinner.js';
+import LeaderboardStatistics from './LeaderboardStatistics.js';
 
 export default {
     components: {
         Spinner,
+        LeaderboardStatistics,
     },
 
     data: () => ({
@@ -147,6 +148,56 @@ export default {
 
                             </div>
                         </div>
+
+                        <!-- Rating Statistics -->
+                        <section class="player-rating-statistics">
+                            <h2>RATING STATISTICS</h2>
+
+                            <div class="rating-statistics-summary">
+                                <div class="rating-stat">
+                                    <h3>{{ ratingStats.stars }}</h3>
+                                    <p>Total Stars</p>
+                                </div>
+
+                                <div class="rating-stat">
+                                    <h3>{{ ratingStats.completed }}</h3>
+                                    <p>Rated Levels</p>
+                                </div>
+
+                                <div class="rating-stat">
+                                    <h3>{{ ratingStats.featured }}</h3>
+                                    <p>Featured Levels</p>
+                                </div>
+                            </div>
+
+                            <h3>Difficulty Breakdown</h3>
+
+                            <div class="rating-difficulty-list">
+                                <div
+                                    v-for="item in ratingStats.difficulties"
+                                    :key="item.name"
+                                    class="rating-difficulty-item"
+                                >
+                                    <span>{{ item.name }}</span>
+                                    <strong>{{ item.count }}</strong>
+                                </div>
+                            </div>
+
+                            <div v-if="ratingStats.demonTypes.length">
+                                <h3>Demon Breakdown</h3>
+
+                                <div class="rating-difficulty-list">
+                                    <div
+                                        v-for="item in ratingStats.demonTypes"
+                                        :key="item.name"
+                                        class="rating-difficulty-item"
+                                    >
+                                        <span>{{ item.name }}</span>
+                                        <strong>{{ item.count }}</strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
 
                         <section class="player-level-summary">
                             <h2>NIVELES COMPLETADOS Y VERIFICADOS:</h2>
@@ -296,55 +347,104 @@ export default {
                             </div>
                         </details>
 
-                        <div
+                        <!-- Packs -->
+                        <section
                             v-if="playerPacks.length > 0"
                             class="player-packs"
                         >
-                            <h2>Packs</h2>
+                            <h2>PACKS</h2>
 
-                            <div
-                                v-for="pack in playerPacks"
-                                :key="pack.name"
-                                class="player-pack"
-                            >
-                                <div class="player-pack-header">
-                                    <div>
-                                        <h3>{{ pack.name }}</h3>
-                                        <p>
-                                            {{ pack.completed }} /
-                                            {{ pack.total }}
-                                            completed
-                                        </p>
+                            <div class="player-packs-list">
+                                <article
+                                    v-for="pack in playerPacks"
+                                    :key="pack.name"
+                                    class="player-pack"
+                                    :class="{ 'player-pack-complete': pack.isComplete }"
+                                >
+                                    <div class="player-pack-header">
+                                        <div class="player-pack-title">
+                                            <h3>{{ pack.name }}</h3>
+
+                                            <p
+                                                v-if="pack.description"
+                                                class="player-pack-description"
+                                            >
+                                                {{ pack.description }}
+                                            </p>
+                                        </div>
+
+                                        <div
+                                            class="player-pack-status"
+                                            :class="{ complete: pack.isComplete }"
+                                        >
+                                            <span v-if="pack.isComplete">
+                                                ✓ Completed
+                                            </span>
+
+                                            <span v-else>
+                                                {{ pack.completed }}/{{ pack.total }}
+                                            </span>
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div class="player-pack-levels">
+                                    <div class="player-pack-progress-info">
+                                        <span>
+                                            {{ pack.completed }} of {{ pack.total }} levels
+                                        </span>
+
+                                        <strong>
+                                            {{ pack.progress }}%
+                                        </strong>
+                                    </div>
+
+                                    <div class="player-pack-progress">
+                                        <div
+                                            class="player-pack-progress-fill"
+                                            :style="{ width: pack.progress + '%' }"
+                                        ></div>
+                                    </div>
+
+                                    <div class="player-pack-levels">
+                                        <div
+                                            v-for="level in pack.levels"
+                                            :key="level.key"
+                                            class="player-pack-level"
+                                            :class="{ completed: level.completed }"
+                                        >
+                                            <span class="player-pack-check">
+                                                {{ level.completed ? '✓' : '○' }}
+                                            </span>
+
+                                            <span class="player-pack-name">
+                                                {{ level.name }}
+                                            </span>
+
+                                            <span class="player-pack-level-status">
+                                                {{ level.completed ? 'Completed' : 'Not completed' }}
+                                            </span>
+                                        </div>
+                                    </div>
+
                                     <div
-                                        v-for="level in pack.levels"
-                                        :key="level.rank"
-                                        class="player-pack-level"
-                                        :class="{ completed: level.completed }"
+                                        v-if="pack.isComplete"
+                                        class="player-pack-reward"
                                     >
-                                        <span class="player-pack-check">
-                                            {{ level.completed ? '✓' : '○' }}
-                                        </span>
-
-                                        <span class="player-pack-rank">
-                                            #{{ level.rank }}
-                                        </span>
-
-                                        <span class="player-pack-name">
-                                            {{ level.name }}
-                                        </span>
+                                        <span>🏆</span>
+                                        <strong>Pack completed</strong>
+                                        <span>+10 points</span>
                                     </div>
-                                </div>
+                                </article>
                             </div>
-                        </div>
+                        </section>
 
                     </div>
                 </div>
 
             </div>
+
+            <!-- New statistics, charts, comparisons and games -->
+            <LeaderboardStatistics />
+
         </main>
     `,
 
@@ -403,45 +503,143 @@ export default {
             );
         },
 
+        ratingStats() {
+            const difficulties = [
+                'Easy',
+                'Normal',
+                'Hard',
+                'Harder',
+                'Insane',
+                'Demon',
+            ];
+
+            const demonTypes = [
+                'Easy Demon',
+                'Medium Demon',
+                'Hard Demon',
+                'Insane Demon',
+                'Extreme Demon',
+            ];
+
+            const completedNames = new Set(
+                this.completedLevels.map(level =>
+                    level.level.trim().toLowerCase()
+                )
+            );
+
+            const manualCompletions = this.player?.completions || [];
+
+            manualCompletions.forEach(name => {
+                if (typeof name === 'string') {
+                    completedNames.add(name.trim().toLowerCase());
+                }
+            });
+
+            const stats = {
+                stars: 0,
+                completed: 0,
+                featured: 0,
+                difficulties: difficulties.map(name => ({
+                    name,
+                    count: 0,
+                })),
+                demonTypes: demonTypes.map(name => ({
+                    name,
+                    count: 0,
+                })),
+            };
+
+            this.levels.forEach(level => {
+                const name = String(level.name || '').trim().toLowerCase();
+
+                if (!name || !completedNames.has(name)) {
+                    return;
+                }
+
+                const rating = level.rating;
+
+                if (!rating || !rating.difficulty) {
+                    return;
+                }
+
+                stats.completed++;
+                stats.stars += Number(rating.stars) || 0;
+
+                if (rating.featured === true) {
+                    stats.featured++;
+                }
+
+                const difficulty = stats.difficulties.find(
+                    item => item.name === rating.difficulty
+                );
+
+                if (difficulty) {
+                    difficulty.count++;
+                }
+
+                if (rating.difficulty === 'Demon' && rating.demonType) {
+                    const demon = stats.demonTypes.find(
+                        item => item.name === rating.demonType
+                    );
+
+                    if (demon) {
+                        demon.count++;
+                    }
+                }
+            });
+
+            return stats;
+        },
+
         playerPacks() {
             if (!this.entry || !this.packs) {
                 return [];
             }
 
-            const completedRanks = new Set([
-                ...(this.entry.completed || []).map(
-                    score => Number(score.rank)
-                ),
-                ...(this.entry.verified || []).map(
-                    score => Number(score.rank)
-                ),
-            ]);
+            const completedNames = new Set(
+                this.completedLevels.map(level =>
+                    level.level.trim().toLowerCase()
+                )
+            );
 
-            const packs = Object.entries(this.packs).map(
+            return Object.entries(this.packs).map(
                 ([name, pack]) => {
-                    const levels = (pack.levels || []).map(rank => {
-                        const levelData = this.levels[rank - 1];
+                    const levels = (pack.levels || []).map(levelName => {
+                        const normalizedName = String(levelName).trim().toLowerCase();
+
+                        const levelData = this.levels.find(level =>
+                            String(level.name || '').trim().toLowerCase() === normalizedName
+                        );
+
+                        const completed = completedNames.has(normalizedName);
 
                         return {
-                            rank,
-                            name: levelData?.name || 'Unknown Level',
-                            completed: completedRanks.has(Number(rank)),
+                            key: normalizedName,
+                            name: levelData?.name || levelName,
+                            completed,
                         };
                     });
 
+                    const total = levels.length;
+                    const completed = levels.filter(
+                        level => level.completed
+                    ).length;
+
+                    const isComplete = total > 0 && completed === total;
+
                     return {
                         name,
-                        description: pack.description,
-                        total: levels.length,
-                        completed: levels.filter(
-                            level => level.completed
-                        ).length,
+                        description: pack.description || '',
+                        total,
+                        completed,
+                        progress: total > 0
+                            ? Math.round((completed / total) * 100)
+                            : 0,
+                        isComplete,
                         levels,
                     };
                 }
-            );
-
-            return packs.filter(pack => pack.completed > 0);
+            ).filter(pack => pack.completed > 0);
         },
     },
 
@@ -486,7 +684,7 @@ export default {
             const list = await fetchList();
 
             if (list) {
-                this.levels = list.map(([level]) => level);
+                this.levels = list.map(([level]) => level).filter(Boolean);
             }
         } catch (error) {
             console.error('Failed to load levels:', error);

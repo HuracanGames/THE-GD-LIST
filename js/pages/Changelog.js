@@ -10,13 +10,60 @@ export default {
             </div>
 
             <section class="changelog__entry">
+             <div class="changelog__date">November 9, 2026</div>
+             <h2>#6 Deception Corridor Unleashed </h2>
+                <ul>
+                    <li>Swap positions with Flawless Wings.</li>
+                    <li>Now placed above Flawless Wings.</li>
+                    <li>Now placed below Jumper Nightmare.</li>
+            <div class="changelog__date">November 6, 2026</div>
+            <h2>#1 Unnerfed Ordinary </h2>
+                <ul>
+                    <li>Was Placed at #1.</li>
+                    <li>Now placed above GRIFO.</li>
+                    <li>Now placed below -.</li>
+            <div class="changelog__date">November 5, 2026</div>
+            <h2>#8 Ordinary </h2>
+                <ul>
+                    <li>Was Placed at #8.</li>
+                    <li>Now placed above Heliopolis VF.</li>
+                    <li>Now placed below James Web.</li>
+            <div class="changelog__date">November 2, 2026</div>
+            <h2>#8 Heliopolis VF </h2>
+                <ul>
+                    <li>Was moved down 2 Positions.</li>
+                    <li>Now placed above Thermodynamix.</li>
+                    <li>Now placed below James Web.</li>
+            <h2>#4 Jumper Nightmare </h2>
+                <ul>
+                    <li>Was Placed at #4.</li>
+                    <li>Now placed above Flawless Wings.</li>
+                    <li>Now placed below Thinking in Dark End.</li>
+            <div class="changelog__date">October 31, 2026</div>
+            
+            <h2>#1 GRIFO </h2>
+                <ul>
+                    <li>Was Placed at #1.</li>
+                    <li>Now placed above Flawless Wings UB.</li>
+                    <li>Now placed below -.</li>
+            <h2>#6 Deception Corridor Unleashed </h2>
+                <ul>
+                    <li>Was moved down 4 positions.</li>
+                    <li>Now placed above James Web.</li>
+                    <li>Now placed below Heliopolis VF.</li>
             <div class="changelog__date">October 29, 2026</div>
-            <h2>#5 James Web I</h2>
+            
+            <h2>#1 Flawless Wings UB </h2>
+                <ul>
+                    <li>Was Placed at #1.</li>
+                    <li>Now placed above Deception Corridor Unleashed.</li>
+                    <li>Now placed below -.</li>
+            <h2>#5 James Web </h2>
                 <ul>
                     <li>Swap Positions with Thermodynamix.</li>
                     <li>Now placed above Thermodynamix.</li>
                     <li>Now placed below Heliopolis VF.</li>
-            <h2>#1 Deception Corridor Unleashed I</h2>
+            <h2>#1 Deception Corridor Unleashed </h2>
                 <ul>
                     <li>Was placed at #1.</li>
                     <li>Now placed above Flawless Wings.</li>
