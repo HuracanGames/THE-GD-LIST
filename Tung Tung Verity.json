@@ -1,0 +1,32 @@
+{
+    "id": 55,
+    "name": "Tung Tung Verity",
+    "author": "MateioPepeio",
+    "creators": [],
+    "verifier": "MateioPepeio",
+    "verification": "",
+    "percentToQualify": "0",
+    "password": "Free To Copy",
+    "records": [
+         {
+            "user": "Santiquemero",
+            "link": "",
+            "percent": 100,
+            "hz": 120
+        },
+         {
+            "user": "Cementerio",
+            "link": "",
+            "percent": 100,
+            "hz": 120
+        }
+    ]
+        ,
+    "rating":
+    {
+        "difficulty": "Easy",
+        "stars": 2,
+        "featured": false,
+        "demonType": null
+        }
+}

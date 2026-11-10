@@ -1,0 +1,19 @@
+{
+    "id": 68,
+    "name": "Jumper Nightmare",
+    "author": "Santiquemero",
+    "creators": [],
+    "verifier": "Santiquemero",
+    "verification": "https://www.youtube.com/watch?v=6K_L0-D251Y",
+    "percentToQualify": "67",
+    "password": "Free To Copy",
+    "records": [
+    ],
+    "rating":
+    {
+        "difficulty": "Demon",
+        "stars": 10,
+        "featured": true,
+        "demonType": "Easy Demon"
+        }
+}

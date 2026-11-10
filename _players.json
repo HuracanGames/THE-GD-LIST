@@ -1,44 +1,56 @@
-
 {
     "Santiquemero": {
         "country": "AR",
-        "hardest": "Heliopolis VF",
-        "hardestPosition": 1
+        "hardest": "Unnerfed Ordinary",
+        "hardestPosition": 1,
+        "cubeUrl": "./assets/cubes/santiquemero.png"
     },
-
-    "Bautx": {
+    "Ghostface": {
         "country": "AR",
-        "hardest": "Thermodynamix",
-        "hardestPosition": 2
+        "hardest": "Short Challenge",
+        "hardestPosition": 68,
+        "cubeUrl": null
     },
-
+    "Lolapro": {
+        "country": "AR",
+        "hardest": "Space Battle X",
+        "hardestPosition": 44,
+        "cubeUrl": "./assets/cubes/lolapro.png"
+    },
     "MateioPepeio": {
         "country": "AR",
         "hardest": "Super Blaster",
-        "hardestPosition": 4
+        "hardestPosition": 21,
+        "cubeUrl": "./assets/cubes/mateiopepeio.png"
     },
-
-    "Cementerio": {
+    "Bautx": {
         "country": "AR",
-        "hardest": "The Road to Home",
-        "hardestPosition": 6
+        "hardest": "GRIFO",
+        "hardestPosition": 2,
+        "cubeUrl": "./assets/cubes/bautx.png"
     },
-
- "Entity32": {
-        "country": "AR",
-        "hardest": "Silent Factory I",
-        "hardestPosition": 9
-    },
-
-     "Lichagrana": {
+    "Lichagrana": {
         "country": "AR",
         "hardest": "Polis",
-        "hardestPosition": 37
+        "hardestPosition": 57,
+        "cubeUrl": "./assets/cubes/lichagrana.png"
     },
-
+    "Cementerio": {
+        "country": "AR",
+        "hardest": "Heliopolis VF",
+        "hardestPosition": 10,
+        "cubeUrl": "./assets/cubes/cementerio.png"
+    },
+    "Entity32": {
+        "country": "AR",
+        "hardest": "Silent Factory I",
+        "hardestPosition": 33,
+        "cubeUrl": null
+    },
     "Taiopro": {
         "country": "AR",
         "hardest": "Baseplate",
-        "hardestPosition": 44
+        "hardestPosition": 64,
+        "cubeUrl": null
     }
 }

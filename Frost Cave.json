@@ -20,5 +20,12 @@
             "percent": 100,
             "hz": 60
         }
-    ]
+    ],
+    "rating":
+    {
+        "difficulty": "Insane",
+        "stars": 9,
+        "featured": true,
+        "demonType": null
+        }
 }

@@ -29,5 +29,12 @@
   { "date": "???", "position": 2 },
   { "date": "???", "position": 1 },
   { "date": "???", "position": 2 }
-  ]
+  ],
+    "rating":
+    {
+        "difficulty": "Demon",
+        "stars": 10,
+        "featured": true,
+        "demonType": "Easy Demon"
+        }
 }

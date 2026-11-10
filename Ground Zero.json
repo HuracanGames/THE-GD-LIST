@@ -1,0 +1,19 @@
+{
+    "id": 62,
+    "name": "Ground Zero",
+    "author": "Santiquemero",
+    "creators": [],
+    "verifier": "Bautx",
+    "verification": "",
+    "percentToQualify": "33",
+    "password": "Free To Copy",
+    "records": [
+        ],
+    "rating":
+    {
+        "difficulty": "Insane",
+        "stars": 8,
+        "featured": true,
+        "demonType": null
+        }
+}

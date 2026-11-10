@@ -8,5 +8,30 @@
     "percentToQualify": "0",
     "password": "Free To Copy",
     "records": [
-    ]
+    {
+        "user": "Bautx",
+        "link": "",
+        "percent": 100,
+        "hz": 60
+    },
+    {
+        "user": "Cementerio",
+        "link": "",
+        "percent": 100,
+        "hz": 60
+    },
+    {
+        "user": "LolaproD",
+        "link": "",
+        "percent": 100,
+        "hz": 60
+    }
+    ],
+    "rating":
+    {
+        "difficulty": "Easy",
+        "stars": 2,
+        "featured": false,
+        "demonType": null
+        }
 }

@@ -1,0 +1,26 @@
+{
+    "id": 54,
+    "name": "Verity Circles",
+    "author": "Santiquemero",
+    "creators": [],
+    "verifier": "Bautx",
+    "verification": "",
+    "percentToQualify": "56",
+    "password": "Free To Copy",
+    "records": [
+         {
+            "user": "Santiquemero",
+            "link": "",
+            "percent": 100,
+            "hz": 120
+        }
+    ]
+        ,
+    "rating":
+    {
+        "difficulty": "Demon",
+        "stars": 10,
+        "featured": true,
+        "demonType": "Easy Demon"
+        }
+}

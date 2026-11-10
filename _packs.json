@@ -3,27 +3,111 @@
         "Beginner Pack": {
             "description": "A pack for beginners.",
             "levels": [
-                43,
-                46,
-                47
+                "Jumpfriendly",
+                "Baseplate",
+                "Xenogenesis"
             ]
         },
 
         "Orbit Pack": {
             "description": "A pack containing the levels inspired in orbit by mindcap.",
             "levels": [
-                27,
-                17
+                "Orbicalty",
+                "Orbicalty II"
             ]
         },
 
         "Space Pack": {
             "description": "A pack containing levels related to space.",
             "levels": [
-                2,
-                6,
-                7
+                "James Web",
+                "Thinking in Dark",
+                "Thinking in Dark Unleashed"
             ]
+        },
+        "Thinking in Dark Pack": {
+            "description": "The Thinking in Dark series.",
+            "levels": ["Thinking in Dark", "Thinking in Dark Unleashed", "Thinking in Dark RMK"]
+        },
+        "Dark Challenges Pack": {
+            "description": "Dark-themed and challenging levels.",
+            "levels": ["Thinking in Dark End", "Ground Zero", "Worst Code"]
+        },
+        "Time Machine Pack": {
+            "description": "Levels from the Time Machine series.",
+            "levels": ["The Time Machine", "The New Time Machine", "The Great Time Machine"]
+        },
+        "Flawless Pack": {
+            "description": "Levels related to Flawless Wings.",
+            "levels": ["Flawless Wings", "Flawless Wings UB", "Growing on Me"]
+        },
+        "Deception Pack": {
+            "description": "Deception and Verity-themed levels.",
+            "levels": ["Deception Corridor", "Deception Corridor Unleashed", "Verity Circles"]
+        },
+        "Super Sonic Pack": {
+            "description": "Super Sonic and related levels.",
+            "levels": ["Super Sonic X", "Super Sonic X Remake", "Super Blaster"]
+        },
+        "Clubstep Pack": {
+            "description": "challenges.",
+            "levels": ["Nerfed Super Blaster", "Super Clubstep"]
+        },
+        "World Explorer Pack": {
+            "description": "Levels about exploration and traveling.",
+            "levels": ["Airbone Bots", "Every Wey", "The Race Around the World"]
+        },
+        "Factory Pack": {
+            "description": "Factory and machinery-themed levels.",
+            "levels": ["Silent Factory I", "Factory I", "Main Bot"]
+        },
+        "Technology Pack": {
+            "description": "Levels with technological themes.",
+            "levels": ["ElectroTest", "Nerfed Super Blaster", "Power on Run"]
+        },
+        "Ordinary Pack": {
+            "description": "Levels from the Ordinary series and related levels.",
+            "levels": ["Ordinary", "Unnerfed Ordinary", "GRIFO"]
+        },
+        "Jumpfriendly Pack": {
+            "description": "Levels related to Jumpfriendly.",
+            "levels": ["Jumpfriendly", "Jumpfriendly ReWork", "Baseplate"]
+        },
+        "Classic Geometry Pack": {
+            "description": "Levels inspired by classic Geometry Dash gameplay.",
+            "levels": ["zStep", "How to xStep", "Stereo Madness 2"]
+        },
+        "Dynamics Pack": {
+            "description": "Levels related to dynamics and processing.",
+            "levels": ["Thermodynamix", "Topdinamix", "Buff on Processing"]
+        },
+        "Probaitit Pack": {
+            "description": "The Probaitit series and a related challenge.",
+            "levels": ["Probaitit", "Probaitit II", "Probaitit III"]
+        },
+        "Jump Challenge Pack": {
+            "description": "Jump-based challenges.",
+            "levels": ["JUMp", "Jumper Nightmare", "Jumpfriendly"]
+        },
+        "Seasons Pack": {
+            "description": "Levels inspired by different environments and seasons.",
+            "levels": ["Frost Cave", "Summer", "The Road to Home"]
+        },
+        "Adventure Pack": {
+            "description": "Levels with adventure and progression themes.",
+            "levels": ["The Final Battle", "Juegalo", "Te han Trolleado"]
+        },
+        "Huracan Pack": {
+            "description": "A collection of distinctive levels.",
+            "levels": ["HURACAN", "Polis", "Xenogenesis"]
+        },
+        "Wave Pack": {
+            "description": "Levels focused on wave-style gameplay and difficulty.",
+            "levels": ["Geometrical Waving", "Sakupen Consistency (W.O.D)", "Layout toda Chafa xD"]
+        },
+        "Final Mix Pack": {
+            "description": "A mixed collection of remaining levels.",
+            "levels": ["Plechito", "Defeated", "Tung Tung Verity"]
         }
     }
 ]

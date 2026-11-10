@@ -1,0 +1,26 @@
+{
+    "id": 61,
+    "name": "Super Sonic X Remake",
+    "author": "Santiquemero",
+    "creators": [],
+    "verifier": "Santiquemero",
+    "verification": "",
+    "percentToQualify": "56",
+    "password": "Free To Copy",
+    "records": [
+        {
+            "user": "Bautx",
+            "link": "",
+            "percent": 100,
+            "hz": 60
+        }
+    ]
+    ,
+    "rating":
+    {
+        "difficulty": "Demon",
+        "stars": 10,
+        "featured": true,
+        "demonType": "Easy Demon"
+        }
+}

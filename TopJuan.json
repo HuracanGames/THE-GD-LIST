@@ -1,0 +1,26 @@
+{
+    "id": 63,
+    "name": "TopJuan",
+    "author": "MateioPepeio, Nerfed by Santiquemero",
+    "creators": [2],
+    "verifier": "Santiquemero",
+    "verification": "",
+    "percentToQualify": "0",
+    "password": "Free To Copy",
+    "records": [
+        {
+            "user": "Bautx",
+            "link": "",
+            "percent": 100,
+            "hz": 60
+        }
+    ]
+        ,
+    "rating":
+    {
+        "difficulty": "Easy",
+        "stars": 2,
+        "featured": false,
+        "demonType": null
+        }
+}

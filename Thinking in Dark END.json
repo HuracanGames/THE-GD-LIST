@@ -1,0 +1,26 @@
+{
+    "id": 53,
+    "name": "Thinking in Dark End",
+    "author": "Santiquemero",
+    "creators": [],
+    "verifier": "Santiquemero",
+    "verification": "https://www.youtube.com/watch?v=gScCZIjiR9w",
+    "percentToQualify": "80",
+    "password": "Free To Copy",
+    "records": [
+        {
+            "user": "Cementerio",
+            "link": "",
+            "percent": 92,
+            "hz": 120
+        }
+    ]
+        ,
+    "rating":
+    {
+        "difficulty": "Demon",
+        "stars": 10,
+        "featured": true,
+        "demonType": "Easy Demon"
+        }
+}

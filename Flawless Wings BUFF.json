@@ -1,0 +1,25 @@
+{
+    "id": 66,
+    "name": "Flawless Wings UB",
+    "author": "Santiquemero, Bautx",
+    "creators": [],
+    "verifier": "Bautx",
+    "verification": "",
+    "percentToQualify": "92",
+    "password": "Free To Copy",
+    "records": [
+        {
+            "user": "Santiquemero",
+            "link": "",
+            "percent": 100,
+            "hz": 120
+        }
+    ],
+    "rating":
+    {
+        "difficulty": "Demon",
+        "stars": 10,
+        "featured": true,
+        "demonType": "Easy Demon"
+        }
+}

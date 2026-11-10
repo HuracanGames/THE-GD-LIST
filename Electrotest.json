@@ -15,5 +15,12 @@
             "hz": 60
         }
         
-    ]
+    ],
+    "rating":
+    {
+        "difficulty": "Harder",
+        "stars": 6,
+        "featured": true,
+        "demonType": null
+        }
 }
